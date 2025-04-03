@@ -24,7 +24,7 @@
     
     body {
       font-family: var(--font-family);
-      font-size: 16px;
+      font-size: 12px;
       line-height: 1.6;
       background-color: var(--bg-color);
       color: var(--text-color);
@@ -69,9 +69,21 @@
     /* Section Styling */
     section {
       margin-bottom: 30px;
+      opacity: 0;           /* Initially hidden */
+      transform: translateY(20px); /* Slightly moved down */
     }
-    section:last-child {
-      margin-bottom: 0;
+    section.visible {
+      animation: fadeIn 0.5s ease forwards;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     h1, h2, h3 {
       color: var(--text-color);
@@ -148,7 +160,7 @@
   <!-- Main Container -->
   <div class="container">
     <!-- Home Section (default visible) -->
-    <section id="home">
+    <section id="home" class="visible">
       <h1>Welcome to My Website!</h1>
       <p>Welcome to my personal website! (Currently under construction)</p>
       <h2>Announcements</h2>
@@ -156,7 +168,7 @@
     </section>
 
     <!-- About Me Section -->
-    <section id="about" style="display:none;">
+    <section id="about">
       <h2>About Me</h2>
       <p>Welcome. I am Haoran Yu, a dedicated researcher and data science professional with a robust academic foundation. I am currently pursuing a Bachelor of Science in Mathematics at the University of Toronto, complemented by minors in Statistics and Economics. My academic journey has been characterized by rigorous coursework that spans both theoretical and applied disciplines. I have engaged deeply with subjects such as Probability and Statistics, Financial Economics, Methods of Data Analysis, and Statistical Machine Learning, which have provided me with a comprehensive understanding of data-centric methodologies.</p>
       <p>This diverse academic training has been instrumental in informing my research and professional projects. I have applied my theoretical knowledge to practical challenges, such as developing machine learning models for loan default prediction, designing anti-fraud analytical frameworks, and conducting regression analyses on insurance premium data. My role as a Real Estate Investment Expansion Intern Analyst further enriched my experience, allowing me to integrate quantitative methods with strategic market research and financial analysis.</p>
@@ -164,14 +176,14 @@
     </section>
 
     <!-- CV Section -->
-    <section id="cv" style="display:none;">
+    <section id="cv">
       <h2>CV</h2>
       <p>You can view or download my CV by clicking the link below:</p>
       <p><a href="CV.pdf" target="_blank">Download My CV (PDF)</a></p>
     </section>
 
     <!-- Courses Section -->
-    <section id="courses" style="display:none;">
+    <section id="courses">
       <h2>Courses</h2>
       <p>Below is a categorized list of all the courses I have taken at the University of Toronto, organized by course level. Click on any course code for more details.</p>
       
@@ -435,15 +447,20 @@
 
   <script>
     function showSection(sectionId) {
-      // Hide all sections
+      // Get all sections and remove "visible" class
       var sections = document.querySelectorAll("section");
       sections.forEach(function(section) {
+        section.classList.remove("visible");
         section.style.display = "none";
       });
-      // Show the selected section
-      document.getElementById(sectionId).style.display = "block";
+      // Show the selected section and add the "visible" class to trigger animation
+      var selected = document.getElementById(sectionId);
+      selected.style.display = "block";
+      // Trigger reflow to ensure the animation starts
+      void selected.offsetWidth;
+      selected.classList.add("visible");
     }
-    // On initial load, only show the Home section
+    // On initial load, only show the Home section with animation
     document.addEventListener("DOMContentLoaded", function() {
       showSection('home');
     });
