@@ -28,6 +28,7 @@
             margin: 0 15px;
             text-decoration: none;
             font-size: 1.1em;
+            cursor: pointer;
         }
         header nav a:hover {
             text-decoration: underline;
@@ -55,22 +56,6 @@
         a:hover {
             text-decoration: underline;
         }
-        .project {
-            margin-bottom: 20px;
-            padding: 10px;
-            background: #e9ecef;
-            border-radius: 5px;
-        }
-        .project h3 {
-            margin: 0;
-        }
-        .project p {
-            margin: 5px 0;
-        }
-        .project a {
-            display: inline-block;
-            margin-top: 5px;
-        }
         ul {
             list-style: disc;
             margin-left: 20px;
@@ -80,32 +65,36 @@
 <body>
     <header>
         <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About Me</a>
-            <a href="#cv">CV</a>
-            <a href="#courses">Courses</a>
-            <a href="#notes">Notes</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
+            <a onclick="showSection('home')">Home</a>
+            <a onclick="showSection('about')">About Me</a>
+            <a onclick="showSection('cv')">CV</a>
+            <a onclick="showSection('courses')">Courses</a>
+            <a onclick="showSection('notes')">Notes</a>
+            <a onclick="showSection('projects')">Projects</a>
+            <a onclick="showSection('contact')">Contact</a>
         </nav>
     </header>
     <div class="container">
+        <!-- Home Section (default visible) -->
         <section id="home">
-            <h1>Haoran (Alex) Yu</h1>
+            <h1>Welcome to My Website!</h1>
             <p>Welcome to my personal website! (Currently under construction)</p>
+            <h2>Announcements</h2>
+            <p>Stay tuned for the latest updates and announcements.</p>
         </section>
-        <section id="about">
+        <!-- Other sections (initially hidden) -->
+        <section id="about" style="display:none;">
             <h2>About Me</h2>
             <p>Welcome. I am Haoran Yu, a dedicated researcher and data science professional with a robust academic foundation. I am currently pursuing a Bachelor of Science in Mathematics at the University of Toronto, complemented by minors in Statistics and Economics. My academic journey has been characterized by rigorous coursework that spans both theoretical and applied disciplines. I have engaged deeply with subjects such as Probability and Statistics, Financial Economics, Methods of Data Analysis, and Statistical Machine Learning, which have provided me with a comprehensive understanding of data-centric methodologies.</p>
             <p>This diverse academic training has been instrumental in informing my research and professional projects. I have applied my theoretical knowledge to practical challenges, such as developing machine learning models for loan default prediction, designing anti-fraud analytical frameworks, and conducting regression analyses on insurance premium data. My role as a Real Estate Investment Expansion Intern Analyst further enriched my experience, allowing me to integrate quantitative methods with strategic market research and financial analysis.</p>
             <p>I am proficient in a range of analytical tools and programming languages, including Python (with libraries such as NumPy, pandas, Matplotlib, PyTorch, and SciPy), R, SAS, and SQL. I invite you to explore my website to learn more about my research contributions, project experiences, and professional achievements.</p>
         </section>
-        <section id="cv">
+        <section id="cv" style="display:none;">
             <h2>CV</h2>
             <p>This section is dedicated to my curriculum vitae. You can either display your CV details here or provide a link to download the document.</p>
             <p><a href="cv.pdf" target="_blank">Download My CV (PDF)</a></p>
         </section>
-        <section id="courses">
+        <section id="courses" style="display:none;">
             <h2>Courses</h2>
             <p>Here is a list of some of the key courses I have completed:</p>
             <ul>
@@ -122,23 +111,38 @@
                 <li>Mathematical Theory of Finance</li>
             </ul>
         </section>
-        <section id="notes">
+        <section id="notes" style="display:none;">
             <h2>Notes</h2>
             <p>This section can be used to share insights, research notes, or blog posts on data science, mathematics, economics, and more. Stay tuned for updates!</p>
         </section>
-        <section id="projects">
+        <section id="projects" style="display:none;">
             <h2>Projects</h2>
-            <div class="project">
+            <div>
                 <h3>Project Name</h3>
                 <p>Brief description of the project.</p>
                 <a href="https://github.com/HaoranYu1234/project-repo" target="_blank">View on GitHub</a>
             </div>
-            <!-- Repeat the above block for each project -->
+            <!-- Repeat project blocks as needed -->
         </section>
-        <section id="contact">
+        <section id="contact" style="display:none;">
             <h2>Contact</h2>
             <p>Feel free to connect with me on <a href="https://www.linkedin.com/in/haoranyu12/" target="_blank">LinkedIn</a> or check out my work on <a href="https://github.com/HaoranYu1234" target="_blank">GitHub</a>.</p>
         </section>
     </div>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.querySelectorAll("section");
+            sections.forEach(function(section) {
+                section.style.display = "none";
+            });
+            // Show the selected section
+            document.getElementById(sectionId).style.display = "block";
+        }
+        // On initial load, only show the Home section
+        document.addEventListener("DOMContentLoaded", function() {
+            showSection('home');
+        });
+    </script>
 </body>
 </html>
