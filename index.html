@@ -1,404 +1,452 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Haoran (Alex) Yu - Portfolio</title>
-    <style>
-        body {
-            font-family: Calibri, sans-serif;
-            font-size: 12px;
-            line-height: 1.6;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        header nav {
-            display: flex;
-            justify-content: center;
-        }
-        header nav a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 1.1em;
-            cursor: pointer;
-        }
-        header nav a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            max-width: 700px; /* Reduced width */
-            margin: auto;
-            background: #fff;
-            padding: 15px;  /* Adjusted padding */
-        }
-        section {
-            padding: 20px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        section:last-child {
-            border-bottom: none;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        a {
-            color: #1a0dab;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        ul {
-            list-style: disc;
-            margin-left: 20px;
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
-            background: #333;
-            color: #fff;
-        }
-        footer a {
-            color: #fff;
-            margin: 0 10px;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Haoran (Alex) Yu - Portfolio</title>
+  <style>
+    /* Global Variables */
+    :root {
+      --bg-color: #f8f9fa;             /* Light background */
+      --text-color: #333;              /* Dark text */
+      --header-footer-bg: #343a40;     /* Dark gray for header/footer */
+      --header-footer-text: #fff;      /* White text for header/footer */
+      --link-color: #007bff;           /* Blue for links */
+      --container-bg: #fff;            /* White container */
+      --font-family: Calibri, sans-serif;
+    }
+
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-family);
+      font-size: 12px;
+      line-height: 1.6;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    /* Header & Navigation */
+    header {
+      background: var(--header-footer-bg);
+      color: var(--header-footer-text);
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header nav {
+      display: flex;
+      justify-content: center;
+    }
+    header nav a {
+      color: var(--header-footer-text);
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    header nav a:hover {
+      color: var(--link-color);
+      text-decoration: underline;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: var(--container-bg);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Section Styling */
+    section {
+      margin-bottom: 30px;
+    }
+    section:last-child {
+      margin-bottom: 0;
+    }
+    h1, h2, h3 {
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+
+    /* Link Styling */
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th {
+      background: #f4f4f4;
+    }
+    h3 {
+      margin-top: 30px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--header-footer-bg);
+      color: var(--header-footer-text);
+      text-align: center;
+      padding: 15px 0;
+    }
+    footer a {
+      color: var(--header-footer-text);
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    footer a:hover {
+      color: var(--link-color);
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a onclick="showSection('home')">Home</a>
-            <a onclick="showSection('about')">About Me</a>
-            <a onclick="showSection('cv')">CV</a>
-            <a onclick="showSection('courses')">Courses</a>
-            <a onclick="showSection('notes')">Notes</a>
-            <a onclick="showSection('projects')">Projects</a>
-        </nav>
-    </header>
-    <div class="container">
-        <!-- Home Section (default visible) -->
-        <section id="home">
-            <h1>Welcome to My Website!</h1>
-            <p>Welcome to my personal website! (Currently under construction)</p>
-            <h2>Announcements</h2>
-            <p>Stay tuned for the latest updates and announcements.</p>
-        </section>
-        <!-- Other sections (initially hidden) -->
-        <section id="about" style="display:none;">
-            <h2>About Me</h2>
-            <p>Welcome. I am Haoran Yu, a dedicated researcher and data science professional with a robust academic foundation. I am currently pursuing a Bachelor of Science in Mathematics at the University of Toronto, complemented by minors in Statistics and Economics. My academic journey has been characterized by rigorous coursework that spans both theoretical and applied disciplines. I have engaged deeply with subjects such as Probability and Statistics, Financial Economics, Methods of Data Analysis, and Statistical Machine Learning, which have provided me with a comprehensive understanding of data-centric methodologies.</p>
-            <p>This diverse academic training has been instrumental in informing my research and professional projects. I have applied my theoretical knowledge to practical challenges, such as developing machine learning models for loan default prediction, designing anti-fraud analytical frameworks, and conducting regression analyses on insurance premium data. My role as a Real Estate Investment Expansion Intern Analyst further enriched my experience, allowing me to integrate quantitative methods with strategic market research and financial analysis.</p>
-            <p>I am proficient in a range of analytical tools and programming languages, including Python (with libraries such as NumPy, pandas, Matplotlib, PyTorch, and SciPy), R, SAS, and SQL. I invite you to explore my website to learn more about my research contributions, project experiences, and professional achievements.</p>
-        </section>
-        <section id="cv" style="display:none;">
-        <h2>CV</h2>
-        <p>You can view or download my CV by clicking the link below:</p>
-        <p><a href="CV.pdf" target="_blank">Download My CV (PDF)</a></p>
-        </section>
-        <section id="courses" style="display:none;">
-            <h2>Courses</h2>
-            <p>Below is a categorized list of all the courses I have taken at the University of Toronto, organized by course level. Click on any course code for more details.</p>
-            
-            <!-- Economics Courses -->
-            <h3>Economics</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course Name</th>
-                        <th>Course Code</th>
-                        <th>Institution</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 100-level -->
-                    <tr>
-                        <td>Principles of Microeconomics</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/eco101h1" target="_blank">ECO101H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Principles of Macroeconomics</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/eco102h1" target="_blank">ECO102H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <!-- 200-level -->
-                    <tr>
-                        <td>Microeconomic Theory</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/eco200y1" target="_blank">ECO200Y1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <!-- 300-level -->
-                    <tr>
-                        <td>Applied Game Theory</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/eco316h1" target="_blank">ECO316H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Financial Economics I</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/eco358h1" target="_blank">ECO358H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Financial Economics II: Corporate Finance</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/eco359h1" target="_blank">ECO359H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <!-- Mathematics Courses -->
-            <h3>Mathematics</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course Name</th>
-                        <th>Course Code</th>
-                        <th>Institution</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 100-level -->
-                    <tr>
-                        <td>Calculus with Proofs</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat137y1" target="_blank">MAT137Y1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <!-- 200-level -->
-                    <tr>
-                        <td>Linear Algebra I</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat223h1" target="_blank">MAT223H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Linear Algebra II</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat224h1" target="_blank">MAT224H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Multivariable Calculus with Proofs</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat237y1" target="_blank">MAT237Y1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Concepts in Abstract Mathematics</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat246h1" target="_blank">MAT246H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Introduction to Ordinary Differential Equations</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat244h1" target="_blank">MAT244H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <!-- 300-level -->
-                    <tr>
-                        <td>Groups and Symmetries</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat301h1" target="_blank">MAT301H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Introduction to Graph Theory</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat332h1" target="_blank">MAT332H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Complex Variables</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat334h1" target="_blank">MAT334H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Introduction to Real Analysis</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/mat337h1" target="_blank">MAT337H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Mathematical Modelling</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/apm348h1" target="_blank">APM348H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Partial Differential Equations</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/apm346h1" target="_blank">APM346H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <!-- 400-level -->
-                    <tr>
-                        <td>Nonlinear Optimization</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/apm462h1" target="_blank">APM462H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Mathematical Theory of Finance</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/apm466h1" target="_blank">APM466H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <!-- Computer Science Courses -->
-            <h3>Computer Science</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course Name</th>
-                        <th>Course Code</th>
-                        <th>Institution</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Introduction to Computer Programming</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/csc108h1" target="_blank">CSC108H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Introduction to Computer Science</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/csc148h1" target="_blank">CSC148H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <!-- Statistics Courses -->
-            <h3>Statistics</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course Name</th>
-                        <th>Course Code</th>
-                        <th>Institution</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 200-level -->
-                    <tr>
-                        <td>Probability and Statistics I</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/sta257h1" target="_blank">STA257H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Probability and Statistics II</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/sta261h1" target="_blank">STA261H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <!-- 300-level -->
-                    <tr>
-                        <td>Methods of Data Analysis I</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/sta302h1" target="_blank">STA302H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Probability</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/sta347h1" target="_blank">STA347H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Statistical Methods for Machine Learning I</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/sta314h1" target="_blank">STA314H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <tr>
-                        <td>Surveys, Sampling and Observational Data</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/sta304h1" target="_blank">STA304H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                    <!-- 400-level -->
-                    <tr>
-                        <td>Time Series Analysis</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/sta457h1" target="_blank">STA457H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <!-- Psychology Courses -->
-            <h3>Psychology</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course Name</th>
-                        <th>Course Code</th>
-                        <th>Institution</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Introduction to Social Psychology</td>
-                        <td><a href="https://artsci.calendar.utoronto.ca/course/psy220h1" target="_blank">PSY220H1</a></td>
-                        <td>University of Toronto</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <style>
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-top: 15px;
-                }
-                th, td {
-                    border: 1px solid #ddd;
-                    padding: 8px;
-                    text-align: left;
-                }
-                th {
-                    background: #f4f4f4;
-                }
-                h3 {
-                    margin-top: 30px;
-                }
-            </style>
-        </section>
+  <!-- Header / Navigation -->
+  <header>
+    <nav>
+      <a onclick="showSection('home')">Home</a>
+      <a onclick="showSection('about')">About Me</a>
+      <a onclick="showSection('cv')">CV</a>
+      <a onclick="showSection('courses')">Courses</a>
+      <a onclick="showSection('notes')">Notes</a>
+      <a onclick="showSection('projects')">Projects</a>
+    </nav>
+  </header>
 
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Home Section (default visible) -->
+    <section id="home">
+      <h1>Welcome to My Website!</h1>
+      <p>Welcome to my personal website! (Currently under construction)</p>
+      <h2>Announcements</h2>
+      <p>Stay tuned for the latest updates and announcements.</p>
+    </section>
 
-        <section id="notes" style="display:none;">
-            <h2>Notes</h2>
-            <p>This section can be used to share insights, research notes, or blog posts on data science, mathematics, economics, and more. Stay tuned for updates!</p>
-        </section>
-        <section id="projects" style="display:none;">
-            <h2>Projects</h2>
-            <div>
-                <h3>Project Name</h3>
-                <p>Brief description of the project.</p>
-                <a href="https://github.com/HaoranYu1234/project-repo" target="_blank">View on GitHub</a>
-            </div>
-            <!-- Repeat project blocks as needed -->
-        </section>
-    </div>
-    <footer>
-        <p>
-            <a href="mailto:haoranyu.yu@mail.utoronto.ca">Email</a> |
-            <a href="https://www.linkedin.com/in/haoranyu12/" target="_blank">LinkedIn</a> |
-            <a href="https://github.com/HaoranYu1234" target="_blank">GitHub</a> |
-            <a href="https://www.instagram.com/alexyu685" target="_blank">Instrgram</a>
-        </p>
-    </footer>
-    <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            var sections = document.querySelectorAll("section");
-            sections.forEach(function(section) {
-                section.style.display = "none";
-            });
-            // Show the selected section
-            document.getElementById(sectionId).style.display = "block";
-        }
-        // On initial load, only show the Home section
-        document.addEventListener("DOMContentLoaded", function() {
-            showSection('home');
-        });
-    </script>
+    <!-- About Me Section -->
+    <section id="about" style="display:none;">
+      <h2>About Me</h2>
+      <p>Welcome. I am Haoran Yu, a dedicated researcher and data science professional with a robust academic foundation. I am currently pursuing a Bachelor of Science in Mathematics at the University of Toronto, complemented by minors in Statistics and Economics. My academic journey has been characterized by rigorous coursework that spans both theoretical and applied disciplines. I have engaged deeply with subjects such as Probability and Statistics, Financial Economics, Methods of Data Analysis, and Statistical Machine Learning, which have provided me with a comprehensive understanding of data-centric methodologies.</p>
+      <p>This diverse academic training has been instrumental in informing my research and professional projects. I have applied my theoretical knowledge to practical challenges, such as developing machine learning models for loan default prediction, designing anti-fraud analytical frameworks, and conducting regression analyses on insurance premium data. My role as a Real Estate Investment Expansion Intern Analyst further enriched my experience, allowing me to integrate quantitative methods with strategic market research and financial analysis.</p>
+      <p>I am proficient in a range of analytical tools and programming languages, including Python (with libraries such as NumPy, pandas, Matplotlib, PyTorch, and SciPy), R, SAS, and SQL. I invite you to explore my website to learn more about my research contributions, project experiences, and professional achievements.</p>
+    </section>
+
+    <!-- CV Section -->
+    <section id="cv" style="display:none;">
+      <h2>CV</h2>
+      <p>You can view or download my CV by clicking the link below:</p>
+      <p><a href="CV.pdf" target="_blank">Download My CV (PDF)</a></p>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" style="display:none;">
+      <h2>Courses</h2>
+      <p>Below is a categorized list of all the courses I have taken at the University of Toronto, organized by course level. Click on any course code for more details.</p>
+      
+      <!-- Economics Courses -->
+      <h3>Economics</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Course Code</th>
+            <th>Institution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 100-level -->
+          <tr>
+            <td>Principles of Microeconomics</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/eco101h1" target="_blank">ECO101H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Principles of Macroeconomics</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/eco102h1" target="_blank">ECO102H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <!-- 200-level -->
+          <tr>
+            <td>Microeconomic Theory</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/eco200y1" target="_blank">ECO200Y1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <!-- 300-level -->
+          <tr>
+            <td>Applied Game Theory</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/eco316h1" target="_blank">ECO316H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Financial Economics I</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/eco358h1" target="_blank">ECO358H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Financial Economics II: Corporate Finance</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/eco359h1" target="_blank">ECO359H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Mathematics Courses -->
+      <h3>Mathematics</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Course Code</th>
+            <th>Institution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 100-level -->
+          <tr>
+            <td>Calculus with Proofs</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat137y1" target="_blank">MAT137Y1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <!-- 200-level -->
+          <tr>
+            <td>Linear Algebra I</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat223h1" target="_blank">MAT223H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Linear Algebra II</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat224h1" target="_blank">MAT224H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Multivariable Calculus with Proofs</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat237y1" target="_blank">MAT237Y1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Concepts in Abstract Mathematics</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat246h1" target="_blank">MAT246H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Introduction to Ordinary Differential Equations</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat244h1" target="_blank">MAT244H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <!-- 300-level -->
+          <tr>
+            <td>Groups and Symmetries</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat301h1" target="_blank">MAT301H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Introduction to Graph Theory</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat332h1" target="_blank">MAT332H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Complex Variables</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat334h1" target="_blank">MAT334H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Introduction to Real Analysis</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/mat337h1" target="_blank">MAT337H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Mathematical Modelling</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/apm348h1" target="_blank">APM348H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Partial Differential Equations</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/apm346h1" target="_blank">APM346H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <!-- 400-level -->
+          <tr>
+            <td>Nonlinear Optimization</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/apm462h1" target="_blank">APM462H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Mathematical Theory of Finance</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/apm466h1" target="_blank">APM466H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Computer Science Courses -->
+      <h3>Computer Science</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Course Code</th>
+            <th>Institution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Introduction to Computer Programming</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/csc108h1" target="_blank">CSC108H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Introduction to Computer Science</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/csc148h1" target="_blank">CSC148H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Statistics Courses -->
+      <h3>Statistics</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Course Code</th>
+            <th>Institution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 200-level -->
+          <tr>
+            <td>Probability and Statistics I</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/sta257h1" target="_blank">STA257H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Probability and Statistics II</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/sta261h1" target="_blank">STA261H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <!-- 300-level -->
+          <tr>
+            <td>Methods of Data Analysis I</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/sta302h1" target="_blank">STA302H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Probability</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/sta347h1" target="_blank">STA347H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Statistical Methods for Machine Learning I</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/sta314h1" target="_blank">STA314H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <tr>
+            <td>Surveys, Sampling and Observational Data</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/sta304h1" target="_blank">STA304H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+          <!-- 400-level -->
+          <tr>
+            <td>Time Series Analysis</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/sta457h1" target="_blank">STA457H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Psychology Courses -->
+      <h3>Psychology</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Course Code</th>
+            <th>Institution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Introduction to Social Psychology</td>
+            <td><a href="https://artsci.calendar.utoronto.ca/course/psy220h1" target="_blank">PSY220H1</a></td>
+            <td>University of Toronto</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Notes Section -->
+    <section id="notes" style="display:none;">
+      <h2>Notes</h2>
+      <p>This section can be used to share insights, research notes, or blog posts on data science, mathematics, economics, and more. Stay tuned for updates!</p>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" style="display:none;">
+      <h2>Projects</h2>
+      <div>
+        <h3>Project Name</h3>
+        <p>Brief description of the project.</p>
+        <a href="https://github.com/HaoranYu1234/project-repo" target="_blank">View on GitHub</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <a href="mailto:haoranyu.yu@mail.utoronto.ca">Email</a> |
+      <a href="https://www.linkedin.com/in/haoranyu12/" target="_blank">LinkedIn</a> |
+      <a href="https://github.com/HaoranYu1234" target="_blank">GitHub</a> |
+      <a href="https://www.instagram.com/alexyu685" target="_blank">Instagram</a>
+    </p>
+  </footer>
+
+  <script>
+    function showSection(sectionId) {
+      // Hide all sections
+      var sections = document.querySelectorAll("section");
+      sections.forEach(function(section) {
+        section.style.display = "none";
+      });
+      // Show the selected section
+      document.getElementById(sectionId).style.display = "block";
+    }
+    // On initial load, only show the Home section
+    document.addEventListener("DOMContentLoaded", function() {
+      showSection('home');
+    });
+  </script>
 </body>
 </html>
-
