@@ -6,12 +6,12 @@
   <style>
     /* Global Variables */
     :root {
-      --bg-color: #f8f9fa;             /* Light background */
-      --text-color: #333;              /* Dark text */
-      --header-footer-bg: #343a40;     /* Dark gray for header/footer */
-      --header-footer-text: #fff;      /* White text for header/footer */
-      --link-color: #007bff;           /* Blue for links */
-      --container-bg: #fff;            /* White container */
+      --bg-color: #f8f9fa;
+      --text-color: #333;
+      --header-footer-bg: linear-gradient(45deg, #343a40, #495057);
+      --header-footer-text: #fff;
+      --link-color: #007bff;
+      --container-bg: #fff;
       --font-family: Calibri, sans-serif;
     }
 
@@ -24,7 +24,7 @@
     
     body {
       font-family: var(--font-family);
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.6;
       background-color: var(--bg-color);
       color: var(--text-color);
@@ -38,6 +38,13 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      background-size: 400% 400%;
+      animation: gradientAnimation 8s ease infinite;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     header nav {
       display: flex;
@@ -49,10 +56,11 @@
       text-decoration: none;
       font-size: 1.1em;
       cursor: pointer;
-      transition: color 0.2s ease;
+      transition: color 0.2s ease, transform 0.2s ease;
     }
     header nav a:hover {
       color: var(--link-color);
+      transform: scale(1.05);
       text-decoration: underline;
     }
 
@@ -66,25 +74,20 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
-    /* Section Styling */
+    /* Section Styling & Animations */
     section {
       margin-bottom: 30px;
-      opacity: 0;           /* Initially hidden */
-      transform: translateY(20px); /* Slightly moved down */
+      opacity: 0;
+      transform: translateY(20px);
     }
     section.visible {
       animation: fadeIn 0.5s ease forwards;
     }
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+
     h1, h2, h3 {
       color: var(--text-color);
       margin-bottom: 10px;
@@ -123,6 +126,38 @@
     }
     h3 {
       margin-top: 30px;
+    }
+    table tbody tr:hover {
+      background-color: #e9ecef;
+      transform: translateX(5px);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* Project Block Animation */
+    .project {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 15px;
+    }
+    .project:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Scroll Down Indicator */
+    .scroll-down {
+      text-align: center;
+      font-size: 2em;
+      margin-top: 20px;
+      animation: bounce 2s infinite;
+      color: var(--link-color);
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(10px); }
+      60% { transform: translateY(5px); }
     }
 
     /* Footer */
@@ -165,6 +200,7 @@
       <p>Welcome to my personal website! (Currently under construction)</p>
       <h2>Announcements</h2>
       <p>Stay tuned for the latest updates and announcements.</p>
+      <div class="scroll-down">&#8595;</div>
     </section>
 
     <!-- About Me Section -->
@@ -186,7 +222,6 @@
     <section id="courses">
       <h2>Courses</h2>
       <p>Below is a categorized list of all the courses I have taken at the University of Toronto, organized by course level. Click on any course code for more details.</p>
-      
       <!-- Economics Courses -->
       <h3>Economics</h3>
       <table>
@@ -198,7 +233,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- 100-level -->
           <tr>
             <td>Principles of Microeconomics</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/eco101h1" target="_blank">ECO101H1</a></td>
@@ -209,13 +243,11 @@
             <td><a href="https://artsci.calendar.utoronto.ca/course/eco102h1" target="_blank">ECO102H1</a></td>
             <td>University of Toronto</td>
           </tr>
-          <!-- 200-level -->
           <tr>
             <td>Microeconomic Theory</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/eco200y1" target="_blank">ECO200Y1</a></td>
             <td>University of Toronto</td>
           </tr>
-          <!-- 300-level -->
           <tr>
             <td>Applied Game Theory</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/eco316h1" target="_blank">ECO316H1</a></td>
@@ -245,13 +277,11 @@
           </tr>
         </thead>
         <tbody>
-          <!-- 100-level -->
           <tr>
             <td>Calculus with Proofs</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/mat137y1" target="_blank">MAT137Y1</a></td>
             <td>University of Toronto</td>
           </tr>
-          <!-- 200-level -->
           <tr>
             <td>Linear Algebra I</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/mat223h1" target="_blank">MAT223H1</a></td>
@@ -277,7 +307,6 @@
             <td><a href="https://artsci.calendar.utoronto.ca/course/mat244h1" target="_blank">MAT244H1</a></td>
             <td>University of Toronto</td>
           </tr>
-          <!-- 300-level -->
           <tr>
             <td>Groups and Symmetries</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/mat301h1" target="_blank">MAT301H1</a></td>
@@ -308,7 +337,6 @@
             <td><a href="https://artsci.calendar.utoronto.ca/course/apm346h1" target="_blank">APM346H1</a></td>
             <td>University of Toronto</td>
           </tr>
-          <!-- 400-level -->
           <tr>
             <td>Nonlinear Optimization</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/apm462h1" target="_blank">APM462H1</a></td>
@@ -357,7 +385,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- 200-level -->
           <tr>
             <td>Probability and Statistics I</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/sta257h1" target="_blank">STA257H1</a></td>
@@ -368,7 +395,6 @@
             <td><a href="https://artsci.calendar.utoronto.ca/course/sta261h1" target="_blank">STA261H1</a></td>
             <td>University of Toronto</td>
           </tr>
-          <!-- 300-level -->
           <tr>
             <td>Methods of Data Analysis I</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/sta302h1" target="_blank">STA302H1</a></td>
@@ -389,7 +415,6 @@
             <td><a href="https://artsci.calendar.utoronto.ca/course/sta304h1" target="_blank">STA304H1</a></td>
             <td>University of Toronto</td>
           </tr>
-          <!-- 400-level -->
           <tr>
             <td>Time Series Analysis</td>
             <td><a href="https://artsci.calendar.utoronto.ca/course/sta457h1" target="_blank">STA457H1</a></td>
@@ -419,15 +444,15 @@
     </section>
 
     <!-- Notes Section -->
-    <section id="notes" style="display:none;">
+    <section id="notes">
       <h2>Notes</h2>
       <p>This section can be used to share insights, research notes, or blog posts on data science, mathematics, economics, and more. Stay tuned for updates!</p>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" style="display:none;">
+    <section id="projects">
       <h2>Projects</h2>
-      <div>
+      <div class="project">
         <h3>Project Name</h3>
         <p>Brief description of the project.</p>
         <a href="https://github.com/HaoranYu1234/project-repo" target="_blank">View on GitHub</a>
@@ -447,20 +472,16 @@
 
   <script>
     function showSection(sectionId) {
-      // Get all sections and remove "visible" class
       var sections = document.querySelectorAll("section");
       sections.forEach(function(section) {
         section.classList.remove("visible");
         section.style.display = "none";
       });
-      // Show the selected section and add the "visible" class to trigger animation
       var selected = document.getElementById(sectionId);
       selected.style.display = "block";
-      // Trigger reflow to ensure the animation starts
       void selected.offsetWidth;
       selected.classList.add("visible");
     }
-    // On initial load, only show the Home section with animation
     document.addEventListener("DOMContentLoaded", function() {
       showSection('home');
     });
