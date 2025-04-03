@@ -2,20 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Alex Yu - Portfolio</title>
+    <title>Haoran (Alex) Yu - Portfolio</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Calibri, sans-serif;
+            font-size: 12px;
             line-height: 1.6;
-            margin: 20px;
+            margin: 0;
             background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header nav {
+            display: flex;
+            justify-content: center;
+        }
+        header nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        header nav a:hover {
+            text-decoration: underline;
         }
         .container {
             max-width: 900px;
             margin: auto;
             background: #fff;
             padding: 20px;
-            border-radius: 10px;
+        }
+        section {
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        section:last-child {
+            border-bottom: none;
         }
         h1, h2, h3 {
             color: #333;
@@ -43,28 +71,74 @@
             display: inline-block;
             margin-top: 5px;
         }
+        ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About Me</a>
+            <a href="#cv">CV</a>
+            <a href="#courses">Courses</a>
+            <a href="#notes">Notes</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
     <div class="container">
-        <h1>Haoran (Alex) Yu</h1>
-        <p>Welcome to my personal website! (Currently under construction)</p>
-
-        <h2>About Me</h2>
-        <p>Welcome. I am Haoran Yu, a dedicated researcher and data science professional with a robust academic foundation. I am currently pursuing a Bachelor of Science in Mathematics at the University of Toronto, complemented by minors in Statistics and Economics. My academic journey has been characterized by rigorous coursework that spans both theoretical and applied disciplines. I have engaged deeply with subjects such as Probability and Statistics, Financial Economics, Methods of Data Analysis, and Statistical Machine Learning, which have provided me with a comprehensive understanding of data-centric methodologies. In addition, courses in Linear Algebra, Advanced Calculus, Abstract Mathematics, Complex Variables, Mathematical Modelling, Nonlinear Optimization, and Mathematical Theory of Finance have honed my analytical and problem-solving capabilities.</p>
-        <p>This diverse academic training has been instrumental in informing my research and professional projects. I have applied my theoretical knowledge to practical challenges, such as developing machine learning models for loan default prediction, designing anti-fraud analytical frameworks, and conducting regression analyses on insurance premium data. My role as a Real Estate Investment Expansion Intern Analyst further enriched my experience, allowing me to integrate quantitative methods with strategic market research and financial analysis.</p>
-        <p>I am proficient in a range of analytical tools and programming languages, including Python (with libraries such as NumPy, pandas, Matplotlib, PyTorch, and SciPy), R, SAS, and SQL. I invite you to explore my website to learn more about my research contributions, project experiences, and professional achievements.</p>
-
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Project Name</h3>
-            <p>Brief description of the project.</p>
-            <a href="https://github.com/HaoranYu1234/project-repo" target="_blank">View on GitHub</a>
-        </div>
-        <!-- Repeat the above block for each project -->
-
-        <h2>Contact</h2>
-        <p>Feel free to connect with me on <a href="https://www.linkedin.com/in/haoranyu12/" target="_blank">LinkedIn</a> or check out my work on <a href="https://github.com/HaoranYu1234" target="_blank">GitHub</a>.</p>
+        <section id="home">
+            <h1>Haoran (Alex) Yu</h1>
+            <p>Welcome to my personal website! (Currently under construction)</p>
+        </section>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Welcome. I am Haoran Yu, a dedicated researcher and data science professional with a robust academic foundation. I am currently pursuing a Bachelor of Science in Mathematics at the University of Toronto, complemented by minors in Statistics and Economics. My academic journey has been characterized by rigorous coursework that spans both theoretical and applied disciplines. I have engaged deeply with subjects such as Probability and Statistics, Financial Economics, Methods of Data Analysis, and Statistical Machine Learning, which have provided me with a comprehensive understanding of data-centric methodologies.</p>
+            <p>This diverse academic training has been instrumental in informing my research and professional projects. I have applied my theoretical knowledge to practical challenges, such as developing machine learning models for loan default prediction, designing anti-fraud analytical frameworks, and conducting regression analyses on insurance premium data. My role as a Real Estate Investment Expansion Intern Analyst further enriched my experience, allowing me to integrate quantitative methods with strategic market research and financial analysis.</p>
+            <p>I am proficient in a range of analytical tools and programming languages, including Python (with libraries such as NumPy, pandas, Matplotlib, PyTorch, and SciPy), R, SAS, and SQL. I invite you to explore my website to learn more about my research contributions, project experiences, and professional achievements.</p>
+        </section>
+        <section id="cv">
+            <h2>CV</h2>
+            <p>This section is dedicated to my curriculum vitae. You can either display your CV details here or provide a link to download the document.</p>
+            <p><a href="cv.pdf" target="_blank">Download My CV (PDF)</a></p>
+        </section>
+        <section id="courses">
+            <h2>Courses</h2>
+            <p>Here is a list of some of the key courses I have completed:</p>
+            <ul>
+                <li>Probability and Statistics</li>
+                <li>Financial Economics</li>
+                <li>Methods of Data Analysis</li>
+                <li>Statistical Machine Learning</li>
+                <li>Linear Algebra</li>
+                <li>Advanced Calculus</li>
+                <li>Abstract Mathematics</li>
+                <li>Complex Variables</li>
+                <li>Mathematical Modelling</li>
+                <li>Nonlinear Optimization</li>
+                <li>Mathematical Theory of Finance</li>
+            </ul>
+        </section>
+        <section id="notes">
+            <h2>Notes</h2>
+            <p>This section can be used to share insights, research notes, or blog posts on data science, mathematics, economics, and more. Stay tuned for updates!</p>
+        </section>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project">
+                <h3>Project Name</h3>
+                <p>Brief description of the project.</p>
+                <a href="https://github.com/HaoranYu1234/project-repo" target="_blank">View on GitHub</a>
+            </div>
+            <!-- Repeat the above block for each project -->
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Feel free to connect with me on <a href="https://www.linkedin.com/in/haoranyu12/" target="_blank">LinkedIn</a> or check out my work on <a href="https://github.com/HaoranYu1234" target="_blank">GitHub</a>.</p>
+        </section>
     </div>
 </body>
 </html>
