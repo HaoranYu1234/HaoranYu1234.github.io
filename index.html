@@ -34,10 +34,10 @@
             text-decoration: underline;
         }
         .container {
-            max-width: 900px;
+            max-width: 700px; /* Reduced width */
             margin: auto;
             background: #fff;
-            padding: 20px;
+            padding: 15px;  /* Adjusted padding */
         }
         section {
             padding: 20px 0;
@@ -60,6 +60,20 @@
             list-style: disc;
             margin-left: 20px;
         }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+        }
+        footer a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -71,7 +85,6 @@
             <a onclick="showSection('courses')">Courses</a>
             <a onclick="showSection('notes')">Notes</a>
             <a onclick="showSection('projects')">Projects</a>
-            <a onclick="showSection('contact')">Contact</a>
         </nav>
     </header>
     <div class="container">
@@ -124,11 +137,15 @@
             </div>
             <!-- Repeat project blocks as needed -->
         </section>
-        <section id="contact" style="display:none;">
-            <h2>Contact</h2>
-            <p>Feel free to connect with me on <a href="https://www.linkedin.com/in/haoranyu12/" target="_blank">LinkedIn</a> or check out my work on <a href="https://github.com/HaoranYu1234" target="_blank">GitHub</a>.</p>
-        </section>
     </div>
+    <footer>
+        <p>
+            <a href="mailto:haoranyu.yu@mail.utoronto.ca">Email</a> |
+            <a href="https://www.linkedin.com/in/haoranyu12/" target="_blank">LinkedIn</a> |
+            <a href="https://github.com/HaoranYu1234" target="_blank">GitHub</a> |
+            <a href="Alex Big Bro man" target="_blank">Instrgram</a>
+        </p>
+    </footer>
     <script>
         function showSection(sectionId) {
             // Hide all sections
@@ -146,3 +163,4 @@
     </script>
 </body>
 </html>
+
