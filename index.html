@@ -26,10 +26,10 @@
     
     body {
       font-family: var(--font-family);
-      font-size: 17px;
+      font-size: 12px;
       line-height: 1.6;
       color: var(--text-color);
-      background: none; /* Remove any background styles */
+      background: none; /* Remove any conflicting background */
       position: relative;
       z-index: 0;
     }
@@ -41,9 +41,9 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -999; /* Ensure it sits behind all content */
+      z-index: -999;
     }
-    
+
     /* Header & Navigation */
     header {
       background: var(--header-footer-bg);
@@ -80,21 +80,19 @@
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       position: relative;
-      z-index: 1; /* Content sits above the particles */
+      z-index: 1;
     }
 
-    /* Section Styling & Animations */
+    /* Section Styling & Transition Animation */
     section {
       margin-bottom: 30px;
       opacity: 0;
       transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     section.visible {
-      animation: fadeIn 0.5s ease forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      opacity: 1;
+      transform: translateY(0);
     }
     h1, h2, h3 {
       color: var(--text-color);
@@ -511,8 +509,9 @@
     </p>
   </footer>
 
-  <!-- Include particles.js from a CDN -->
+<!-- Particles.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <!-- Initialize Particles.js -->
   <script>
     particlesJS("particles-js", {
       "particles": {
@@ -522,7 +521,7 @@
         "opacity": { "value": 0.5 },
         "size": { "value": 3, "random": true },
         "line_linked": { "enable": true, "distance": 150, "color": "#007bff", "opacity": 0.4, "width": 1 },
-        "move": { "enable": true, "speed": 1.5 }
+        "move": { "enable": true, "speed": 3 }
       },
       "interactivity": {
         "events": {
@@ -538,7 +537,7 @@
     });
   </script>
 
-
+  <!-- Section Toggle Script -->
   <script>
     function showSection(sectionId) {
       var sections = document.querySelectorAll("section");
