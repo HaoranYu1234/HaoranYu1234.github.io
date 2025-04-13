@@ -617,7 +617,7 @@
     });
   </script>
   
-  <!-- Section Toggle Script -->
+ <!-- Section Toggle Script -->
   <script>
     function showSection(sectionId) {
       // Hide all sections within the main container
@@ -626,11 +626,12 @@
         section.classList.remove("visible");
         section.style.display = "none";
       });
-      // Hide projects section container by default
+      
+      // Hide the projects section container by default
       var projectsSection = document.querySelector(".projects-section");
       if (projectsSection) projectsSection.style.display = "none";
       
-      // If projects are selected, show the projects container; otherwise show the selected section
+      // Show the selected section
       if (sectionId === "projects") {
         var selected = document.getElementById(sectionId);
         selected.style.display = "block";
@@ -644,7 +645,6 @@
         selected.classList.add("visible");
       }
     }
-    
     document.addEventListener("DOMContentLoaded", function() {
       showSection('home');
     });
