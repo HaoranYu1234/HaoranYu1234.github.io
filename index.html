@@ -71,7 +71,7 @@
       text-decoration: underline;
     }
 
-    /* Main Container for Most Sections */
+    /* Main Container */
     .container {
       max-width: 800px;
       margin: 30px auto;
@@ -81,20 +81,17 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       position: relative;
       z-index: 1;
-      display: none; /* Hidden by default */
     }
 
-    /* Projects Section Container (Wider) */
     .projects-section {
-      max-width: 1200px;
+      max-width: 1200px; /* Increase the overall width */
       margin: 30px auto;
       padding: 20px;
       background: var(--container-bg);
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       position: relative;
       z-index: 1;
-      display: none; /* Hidden by default */
     }
 
     /* Section Styling & Transition Animation */
@@ -130,13 +127,14 @@
       vertical-align: middle;
     }
     th { background: #f4f4f4; }
+    h3 { margin-top: 30px; }
     table tbody tr:hover {
       background-color: #e9ecef;
       transform: translateX(5px);
       transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
-    /* Course Notes Styling */
+    /* Course Notes Styling with Hover Animation (same as project block) */
     .course-notes {
       background-color: #eef6f9;
       border-left: 4px solid var(--link-color);
@@ -161,7 +159,7 @@
       margin-bottom: 8px;
     }
 
-    /* Projects Container Layout (3 per row) */
+     /* Projects Container Layout (3 per row) */
     .projects-container {
       display: flex;
       flex-wrap: wrap;
@@ -200,10 +198,30 @@
       60% { transform: translateY(5px); }
     }
 
+    /* Course Notes Styling (for the Notes section) */
+    .course-notes {
+      background-color: #eef6f9;
+      border-left: 4px solid var(--link-color);
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+    .course-notes h3 {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .course-notes ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+    .course-notes ul li {
+      margin-bottom: 8px;
+    }
+
     .clearfix::after {
-      content: "";
-      display: table;
-      clear: both;
+    content: "";
+    display: table;
+    clear: both;
     }
 
     /* Footer Fixed at Bottom */
@@ -246,7 +264,7 @@
     </nav>
   </header>
   
-  <!-- Main Container for Most Sections -->
+  <!-- Main Container -->
   <div class="container">
     <!-- Home Section (default visible) -->
     <section id="home" class="visible">
@@ -257,24 +275,27 @@
       <p>Stay tuned for the latest updates and announcements.</p>
       <div class="scroll-down">&#8595;</div>
     </section>
-    
+
     <!-- About Me Section -->
     <section id="about">
       <h2>About Me</h2>
       <div class="about-content clearfix">
-        <img src="profile.jpg" alt="Haoran Yu" style="max-width:350px; border-radius:50%; float:left; margin-right:20px;">
-        <p>I am Haoran Yu, a researcher and data science professional pursuing a Bachelor of Science in Mathematics at the University of Toronto, with minors in Statistics and Economics. My academic background in probability, statistics, financial economics, data analysis, and machine learning has provided me with a strong foundation in quantitative methods. I leverage these skills to develop robust analytical frameworks and predictive models for complex real-world challenges, while continuously expanding my expertise through ongoing research and projects.</p>
-        <p>I am proficient in Python (including libraries such as NumPy, pandas, Matplotlib, PyTorch, SciPy, and scikit-learn), R, SAS, and SQL.</p>
-      </div>
+      <img src="profile.jpg" alt="Haoran Yu" style="max-width:350px; border-radius:50%; float:left; margin-right:20px;">
+      <p>
+        I am Haoran Yu, a researcher and data science professional pursuing a Bachelor of Science in Mathematics at the University of Toronto, with minors in Statistics and Economics. My academic background in probability, statistics, financial economics, data analysis, and machine learning has provided me with a strong foundation in quantitative methods. I leverage these skills to develop robust analytical frameworks and predictive models for complex real-world challenges, while continuously expanding my expertise through ongoing research and projects.
+      </p>
+      <p>
+        I am proficient in Python (including libraries such as NumPy, pandas, Matplotlib, PyTorch, SciPy, and scikit-learn), R, SAS, and SQL.
+      </p>
     </section>
-    
+
     <!-- CV Section -->
     <section id="cv">
       <h2>CV</h2>
       <p>You can view or download my CV by clicking the link below:</p>
       <p><a href="CV.pdf" target="_blank">Download My CV (PDF)</a></p>
     </section>
-    
+
     <!-- Courses Section -->
     <section id="courses">
       <h2>Courses</h2>
@@ -499,7 +520,7 @@
         </tbody>
       </table>
     </section>
-    
+
     <!-- Notes Section -->
     <section id="notes" style="display:none;">
       <h2>Notes</h2>
