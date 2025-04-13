@@ -148,6 +148,18 @@
       margin-bottom: 8px;
     }
 
+     /* Projects Container Layout (3 per row) */
+    .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+    .projects-container .project {
+      flex: 1 1 calc(33.333% - 20px);
+      box-sizing: border-box;
+    }
+
     /* Project Block Animation */
     .project {
       padding: 10px;
