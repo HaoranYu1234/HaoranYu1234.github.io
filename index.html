@@ -75,13 +75,26 @@
     .container {
       max-width: 800px;
       margin: 30px auto;
-      margin-bottom: 80px; /* Extra space so content does not hide behind fixed footer */
       background: var(--container-bg);
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       position: relative;
       z-index: 1;
+      display: none; /* Hidden by default */
+    }
+
+    /* Projects Section Container (Wider) */
+    .projects-section {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+      background: var(--container-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+      display: none; /* Hidden by default */
     }
 
     /* Section Styling & Transition Animation */
@@ -158,19 +171,6 @@
     .projects-container .project {
       flex: 1 1 calc(33.333% - 20px);
       box-sizing: border-box;
-    }
-
-    /* Projects Section Container - Wider and Hidden by Default */
-    .projects-section {
-      max-width: 1200px; /* Increase overall width for projects */
-      margin: 30px auto;
-      padding: 20px;
-      background: var(--container-bg);
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      position: relative;
-      z-index: 1;
-      display: none;
     }
 
     /* Project Block Animation */
@@ -549,7 +549,7 @@
         <div class="project">
           <h3>University of Toronto Undergraduate Course Notes</h3>
           <p>This project curates comprehensive course notes from my classes at the University of Toronto, covering mathematics, economics, and statistics. The notes, prepared in LaTeX, are regularly updated and reflect my personal academic experience. As I continue to learn, certain definitions or proofs may be refined further.</p>
-          <p><strong>Key Skills:</strong> Proficiency in LaTeX, effective note-taking, time management, and deep subject knowledge in mathematics, economics, and statistics.</p>
+          <p><strong>Key Skills:</strong> Proficiency in LaTeX, effective note-taking, time management, and deep subject knowledge.</p>
         </div>
         
         <!-- Project 2: Regression Analysis on Insurance Premium -->
@@ -564,7 +564,7 @@
         <div class="project">
           <h3>Detection of YouTube Spam Comments</h3>
           <p>This project explores methods for detecting spam comments on YouTube by cleaning and processing text data, extracting features, and using machine learning to classify comments.</p>
-          <p><strong>Key Skills:</strong> Natural language processing, feature extraction, and classification algorithms using machine learning.</p>
+          <p><strong>Key Skills:</strong> Natural language processing, feature extraction, and machine learning classification.</p>
           <p><a href="https://github.com/HaoranYu1234/STA314H1-Course-Project-Detection-of-YouTube-Spam-Comments" target="_blank">View Project on GitHub</a></p>
         </div>
         
@@ -617,34 +617,33 @@
     });
   </script>
   
- <!-- Section Toggle Script -->
+  <!-- Section Toggle Script -->
   <script>
     function showSection(sectionId) {
-      // Hide all sections within the main container
-      var mainSections = document.querySelectorAll(".container > section");
-      mainSections.forEach(function(section) {
-        section.classList.remove("visible");
-        section.style.display = "none";
-      });
-      
-      // Hide the projects section container by default
+      // Get containers for main sections and projects
+      var container = document.querySelector(".container");
       var projectsSection = document.querySelector(".projects-section");
+
+      // Hide both containers
+      if (container) container.style.display = "none";
       if (projectsSection) projectsSection.style.display = "none";
       
-      // Show the selected section
+      // Show the chosen section from the appropriate container
       if (sectionId === "projects") {
+        projectsSection.style.display = "block";
         var selected = document.getElementById(sectionId);
         selected.style.display = "block";
         void selected.offsetWidth;
         selected.classList.add("visible");
-        projectsSection.style.display = "block";
       } else {
+        container.style.display = "block";
         var selected = document.getElementById(sectionId);
         selected.style.display = "block";
         void selected.offsetWidth;
         selected.classList.add("visible");
       }
     }
+    
     document.addEventListener("DOMContentLoaded", function() {
       showSection('home');
     });
