@@ -71,10 +71,11 @@
       text-decoration: underline;
     }
 
-    /* Main Container */
+    /* Main Container for Most Sections */
     .container {
       max-width: 800px;
       margin: 30px auto;
+      margin-bottom: 80px; /* Extra space so content does not hide behind fixed footer */
       background: var(--container-bg);
       padding: 20px;
       border-radius: 8px;
@@ -83,8 +84,9 @@
       z-index: 1;
     }
 
+    /* Projects Section Container - Wider and Hidden by Default */
     .projects-section {
-      max-width: 1200px; /* Increase the overall width */
+      max-width: 1200px; /* Increase overall width for projects */
       margin: 30px auto;
       padding: 20px;
       background: var(--container-bg);
@@ -92,6 +94,7 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       position: relative;
       z-index: 1;
+      display: none; /* Hidden by default */
     }
 
     /* Section Styling & Transition Animation */
@@ -127,14 +130,13 @@
       vertical-align: middle;
     }
     th { background: #f4f4f4; }
-    h3 { margin-top: 30px; }
     table tbody tr:hover {
       background-color: #e9ecef;
       transform: translateX(5px);
       transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
-    /* Course Notes Styling with Hover Animation (same as project block) */
+    /* Course Notes Styling */
     .course-notes {
       background-color: #eef6f9;
       border-left: 4px solid var(--link-color);
@@ -159,7 +161,7 @@
       margin-bottom: 8px;
     }
 
-     /* Projects Container Layout (3 per row) */
+    /* Projects Container Layout (3 per row) */
     .projects-container {
       display: flex;
       flex-wrap: wrap;
@@ -198,30 +200,10 @@
       60% { transform: translateY(5px); }
     }
 
-    /* Course Notes Styling (for the Notes section) */
-    .course-notes {
-      background-color: #eef6f9;
-      border-left: 4px solid var(--link-color);
-      padding: 15px;
-      margin-bottom: 20px;
-      border-radius: 4px;
-    }
-    .course-notes h3 {
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    .course-notes ul {
-      list-style-type: disc;
-      margin-left: 20px;
-    }
-    .course-notes ul li {
-      margin-bottom: 8px;
-    }
-
     .clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
+      content: "";
+      display: table;
+      clear: both;
     }
 
     /* Footer Fixed at Bottom */
@@ -264,7 +246,7 @@
     </nav>
   </header>
   
-  <!-- Main Container -->
+  <!-- Main Container for Most Sections -->
   <div class="container">
     <!-- Home Section (default visible) -->
     <section id="home" class="visible">
@@ -275,27 +257,24 @@
       <p>Stay tuned for the latest updates and announcements.</p>
       <div class="scroll-down">&#8595;</div>
     </section>
-
+    
     <!-- About Me Section -->
     <section id="about">
       <h2>About Me</h2>
       <div class="about-content clearfix">
-      <img src="profile.jpg" alt="Haoran Yu" style="max-width:350px; border-radius:50%; float:left; margin-right:20px;">
-      <p>
-        I am Haoran Yu, a researcher and data science professional pursuing a Bachelor of Science in Mathematics at the University of Toronto, with minors in Statistics and Economics. My academic background in probability, statistics, financial economics, data analysis, and machine learning has provided me with a strong foundation in quantitative methods. I leverage these skills to develop robust analytical frameworks and predictive models for complex real-world challenges, while continuously expanding my expertise through ongoing research and projects.
-      </p>
-      <p>
-        I am proficient in Python (including libraries such as NumPy, pandas, Matplotlib, PyTorch, SciPy, and scikit-learn), R, SAS, and SQL.
-      </p>
+        <img src="profile.jpg" alt="Haoran Yu" style="max-width:350px; border-radius:50%; float:left; margin-right:20px;">
+        <p>I am Haoran Yu, a researcher and data science professional pursuing a Bachelor of Science in Mathematics at the University of Toronto, with minors in Statistics and Economics. My academic background in probability, statistics, financial economics, data analysis, and machine learning has provided me with a strong foundation in quantitative methods. I leverage these skills to develop robust analytical frameworks and predictive models for complex real-world challenges, while continuously expanding my expertise through ongoing research and projects.</p>
+        <p>I am proficient in Python (including libraries such as NumPy, pandas, Matplotlib, PyTorch, SciPy, and scikit-learn), R, SAS, and SQL.</p>
+      </div>
     </section>
-
+    
     <!-- CV Section -->
     <section id="cv">
       <h2>CV</h2>
       <p>You can view or download my CV by clicking the link below:</p>
       <p><a href="CV.pdf" target="_blank">Download My CV (PDF)</a></p>
     </section>
-
+    
     <!-- Courses Section -->
     <section id="courses">
       <h2>Courses</h2>
@@ -520,7 +499,7 @@
         </tbody>
       </table>
     </section>
-
+    
     <!-- Notes Section -->
     <section id="notes" style="display:none;">
       <h2>Notes</h2>
@@ -560,58 +539,46 @@
       <p>More notes and updates will be added here over time. Stay tuned!</p>
     </section>
   </div>
-
+  
+  <!-- Projects Section (Wider Container) -->
   <div class="projects-section">
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects-container">
-      <!-- Project 1: University of Toronto Undergraduate Course Notes -->
-      <div class="project">
-        <h3>University of Toronto Undergraduate Course Notes</h3>
-        <p>
-          This project curates comprehensive course notes from my classes at the University of Toronto, primarily covering mathematics, economics, and statistics. Prepared in LaTeX, these notes are updated regularly throughout my undergraduate journey, with earlier versions revised as needed. Please note that course content may vary between sessions, so the notes are tailored to my particular academic experience. As I continue to learn, certain definitions, theorems, or proofs may be refined further. This project is ongoing—more notes will be added in the Notes section.
-        </p>
-        <p><strong>Key Skills:</strong> Proficiency in LaTeX, effective note-taking, time management, and in-depth knowledge of mathematics, economics, and statistics.</p>
-      </div>
-    
-      <!-- Project 2: Regression Analysis on Insurance Premium -->
-      <div class="project">
-        <h3>Regression Analysis on Insurance Premium</h3>
-        <p>
-          This project involves conducting a comprehensive regression analysis on insurance premium data. It evaluates relationships between various factors and premium amounts using statistical methods, illustrating the application of data science in real-world scenarios.
-        </p>
-        <p><strong>Key Skills:</strong> Data cleaning and preprocessing, regression analysis, data visualization, and R.</p>
-        <p>
-          <a href="https://github.com/HaoranYu1234/Regression-Analysis-on-Insruance-Premium" target="_blank">View Project on GitHub</a>
-        </p>
-      </div>
-    
-      <!-- Project 3: Detection of YouTube Spam Comments -->
-      <div class="project">
-        <h3>Detection of YouTube Spam Comments</h3>
-        <p>
-          This project explores methods for detecting spam comments on YouTube by cleaning and processing text data, extracting features, and applying machine learning algorithms. It demonstrates practical approaches to content moderation.
-        </p>
-        <p><strong>Key Skills:</strong> Natural language processing, feature extraction, and classification algorithms using machine learning.</p>
-        <p>
-          <a href="https://github.com/HaoranYu1234/STA314H1-Course-Project-Detection-of-YouTube-Spam-Comments" target="_blank">View Project on GitHub</a>
-        </p>
-      </div>
-    
-      <!-- Project 4: Research in Biodiversity of National Park -->
-      <div class="project">
-        <h3>Research in Biodiversity of National Park</h3>
-        <p>
-          This research project examines the biodiversity in a national park using statistical analysis and machine learning techniques. It identifies key species distributions and analyzes the impact of environmental factors, contributing valuable insights for conservation and ecological studies.
-        </p>
-        <p><strong>Key Skills:</strong> Statistical analysis, data visualization and communication.</p>
-        <p>
-          <a href="https://github.com/HaoranYu1234/Research-in-Biodiversity-of-national-park" target="_blank">View Project on GitHub</a>
-        </p>
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-container">
+        <!-- Project 1: University of Toronto Undergraduate Course Notes -->
+        <div class="project">
+          <h3>University of Toronto Undergraduate Course Notes</h3>
+          <p>This project curates comprehensive course notes from my classes at the University of Toronto, covering mathematics, economics, and statistics. The notes, prepared in LaTeX, are regularly updated and reflect my personal academic experience. As I continue to learn, certain definitions or proofs may be refined further.</p>
+          <p><strong>Key Skills:</strong> Proficiency in LaTeX, effective note-taking, time management, and deep subject knowledge in mathematics, economics, and statistics.</p>
+        </div>
+        
+        <!-- Project 2: Regression Analysis on Insurance Premium -->
+        <div class="project">
+          <h3>Regression Analysis on Insurance Premium</h3>
+          <p>This project involves conducting a comprehensive regression analysis on insurance premium data. It evaluates relationships between various factors and premium amounts using statistical methods.</p>
+          <p><strong>Key Skills:</strong> Data cleaning, regression analysis, statistical modeling, data visualization, and R.</p>
+          <p><a href="https://github.com/HaoranYu1234/Regression-Analysis-on-Insruance-Premium" target="_blank">View Project on GitHub</a></p>
+        </div>
+        
+        <!-- Project 3: Detection of YouTube Spam Comments -->
+        <div class="project">
+          <h3>Detection of YouTube Spam Comments</h3>
+          <p>This project explores methods for detecting spam comments on YouTube by cleaning and processing text data, extracting features, and using machine learning to classify comments.</p>
+          <p><strong>Key Skills:</strong> Natural language processing, feature extraction, and classification algorithms using machine learning.</p>
+          <p><a href="https://github.com/HaoranYu1234/STA314H1-Course-Project-Detection-of-YouTube-Spam-Comments" target="_blank">View Project on GitHub</a></p>
+        </div>
+        
+        <!-- Project 4: Research in Biodiversity of National Park -->
+        <div class="project">
+          <h3>Research in Biodiversity of National Park</h3>
+          <p>This research project examines the biodiversity in a national park using statistical analysis and machine learning techniques to identify species distributions and evaluate environmental impacts.</p>
+          <p><strong>Key Skills:</strong> Statistical analysis, data visualization, and environmental data analysis.</p>
+          <p><a href="https://github.com/HaoranYu1234/Research-in-Biodiversity-of-national-park" target="_blank">View Project on GitHub</a></p>
+        </div>
       </div>
     </section>
   </div>
-
+  
   <!-- Footer -->
   <footer>
     <p>
@@ -621,8 +588,8 @@
       <a href="https://www.instagram.com/alexyu685" target="_blank">Instagram</a>
     </p>
   </footer>
-
-<!-- Particles.js Library -->
+  
+  <!-- Particles.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <!-- Initialize Particles.js -->
   <script>
@@ -638,7 +605,7 @@
       },
       "interactivity": {
         "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
+          "onhover": { "enable": true, "mode": "grab" },
           "onclick": { "enable": true, "mode": "push" }
         },
         "modes": {
@@ -649,20 +616,35 @@
       "retina_detect": true
     });
   </script>
-
+  
   <!-- Section Toggle Script -->
   <script>
     function showSection(sectionId) {
-      var sections = document.querySelectorAll("section");
-      sections.forEach(function(section) {
+      // Hide all sections within the main container
+      var mainSections = document.querySelectorAll(".container > section");
+      mainSections.forEach(function(section) {
         section.classList.remove("visible");
         section.style.display = "none";
       });
-      var selected = document.getElementById(sectionId);
-      selected.style.display = "block";
-      void selected.offsetWidth;
-      selected.classList.add("visible");
+      // Hide projects section container by default
+      var projectsSection = document.querySelector(".projects-section");
+      if (projectsSection) projectsSection.style.display = "none";
+      
+      // If projects are selected, show the projects container; otherwise show the selected section
+      if (sectionId === "projects") {
+        var selected = document.getElementById(sectionId);
+        selected.style.display = "block";
+        void selected.offsetWidth;
+        selected.classList.add("visible");
+        projectsSection.style.display = "block";
+      } else {
+        var selected = document.getElementById(sectionId);
+        selected.style.display = "block";
+        void selected.offsetWidth;
+        selected.classList.add("visible");
+      }
     }
+    
     document.addEventListener("DOMContentLoaded", function() {
       showSection('home');
     });
