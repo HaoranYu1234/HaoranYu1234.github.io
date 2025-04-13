@@ -83,6 +83,17 @@
       z-index: 1;
     }
 
+    .projects-section {
+      max-width: 1200px; /* Increase the overall width */
+      margin: 30px auto;
+      padding: 20px;
+      background: var(--container-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+
     /* Section Styling & Transition Animation */
     section {
       margin-bottom: 30px;
@@ -156,7 +167,7 @@
       justify-content: space-between;
     }
     .projects-container .project {
-      flex: 1 1 calc(33.333% - 10px);
+      flex: 1 1 calc(33.333% - 20px);
       box-sizing: border-box;
     }
 
@@ -550,7 +561,7 @@
     </section>
 
 
-  <section id="projects">
+  <section id="projects" class="projects-section">
     <h2>Projects</h2>
     <div class="projects-container">
       <!-- Project 1: University of Toronto Undergraduate Course Notes -->
