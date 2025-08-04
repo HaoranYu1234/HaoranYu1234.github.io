@@ -190,6 +190,44 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
+    /* hide the default triangle */
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    details summary {
+      cursor: pointer;
+      font-size: 1.2em;
+      font-weight: bold;
+      padding: 8px;
+      background: #eef6f9;
+      border: 1px solid var(--link-color);
+      border-radius: 4px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    /* custom arrow */
+    details summary:before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      transition: transform 0.2s ease;
+    }
+    details[open] summary:before {
+      content: "▼";
+      transform: rotate(0deg);
+    }
+    /* keep your spacing on the inner content */
+    .category-content {
+      padding: 10px 0 20px 20px;
+    }
+    /* ensure tables within can scroll if tall (optional) */
+    .category-content table {
+      max-height: 300px;
+      overflow-y: auto;
+      display: block;
+    }
+
+
     /* Scroll Down Indicator */
     .scroll-down {
       text-align: center;
@@ -278,33 +316,46 @@
       <h2>Courses and Relevant Education</h2>
       <p>Below is a categorized overview of the courses I have undertaken at the University of Toronto as a undergraduate student and other educational experiences. In the future, I will add more courses as a graduate student.</p>
 
-      <div class="course-category">
-        <h3>Online Certifications &amp; Specializations</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Type</th>
-              <th>Issuer</th>
-              <th>Link</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Python for Everybody</td>
-              <td>Specialization</td>
-              <td>Coursera and University of Michigan</td>
-              <td><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/4347YZ5A92VV" target="_blank">View Specialization</a></td>
-            </tr>
-            <tr>
-              <td>Google Data Analytics</td>
-              <td>Specialization</td>
-              <td>Coursera and Google</td>
-              <td><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/RZF8FAAZQG3P" target="_blank">View Specialization</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <details class="course-category">
+        <summary>Online Certifications &amp; Specializations</summary>
+        <div class="category-content">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Issuer</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Python for Everybody</td>
+                <td>Specialization</td>
+                <td>Coursera &amp; University of Michigan</td>
+                <td>
+                  <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/4347YZ5A92VV"
+                     target="_blank">
+                     View Specialization
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Google Data Analytics</td>
+                <td>Professional Certificate</td>
+                <td>Coursera &amp; Google</td>
+                <td>
+                  <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/RZF8FAAZQG3P"
+                     target="_blank">
+                     View Certificate
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
       
       <div class="course-category">
         <h3>Economics</h3>
@@ -351,185 +402,153 @@
         </table>
       </div>
       
-      <div class="course-category">
-        <h3>Mathematics</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Course Name</th>
-              <th>Course Code</th>
-              <th>Institution</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Calculus with Proofs</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat137y1" target="_blank">MAT137Y1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Linear Algebra I</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat223h1" target="_blank">MAT223H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Linear Algebra II</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat224h1" target="_blank">MAT224H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Multivariable Calculus with Proofs</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat237y1" target="_blank">MAT237Y1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Concepts in Abstract Mathematics</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat246h1" target="_blank">MAT246H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Introduction to Ordinary Differential Equations</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat244h1" target="_blank">MAT244H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Groups and Symmetries</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat301h1" target="_blank">MAT301H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Introduction to Graph Theory</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat332h1" target="_blank">MAT332H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Complex Variables</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat334h1" target="_blank">MAT334H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Introduction to Real Analysis</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/mat337h1" target="_blank">MAT337H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Mathematical Modelling</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/apm348h1" target="_blank">APM348H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Partial Differential Equations</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/apm346h1" target="_blank">APM346H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Nonlinear Optimization</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/apm462h1" target="_blank">APM462H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Mathematical Theory of Finance</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/apm466h1" target="_blank">APM466H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <details class="course-category">
+        <summary>Economics</summary>
+        <div class="category-content">
+          <table>
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Institution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Principles of Microeconomics</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/eco101h1" target="_blank">ECO101H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Principles of Macroeconomics</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/eco102h1" target="_blank">ECO102H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Microeconomic Theory</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/eco200y1" target="_blank">ECO200Y1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Applied Game Theory</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/eco316h1" target="_blank">ECO316H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Financial Economics I</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/eco358h1" target="_blank">ECO358H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Financial Economics II: Corporate Finance</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/eco359h1" target="_blank">ECO359H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="course-category">
+        <summary>Computer Science</summary>
+        <div class="category-content">
+          <table>
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Institution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Introduction to Computer Programming</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/csc108h1" target="_blank">CSC108H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Introduction to Computer Science</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/csc148h1" target="_blank">CSC148H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
       
-      <div class="course-category">
-        <h3>Computer Science</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Course Name</th>
-              <th>Course Code</th>
-              <th>Institution</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Introduction to Computer Programming</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/csc108h1" target="_blank">CSC108H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Introduction to Computer Science</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/csc148h1" target="_blank">CSC148H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <details class="course-category">
+        <summary>Statistics</summary>
+        <div class="category-content">
+          <table>
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Institution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Probability and Statistics I</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/sta257h1" target="_blank">STA257H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Probability and Statistics II</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/sta261h1" target="_blank">STA261H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Methods of Data Analysis I</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/sta302h1" target="_blank">STA302H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Probability</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/sta347h1" target="_blank">STA347H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Statistical Methods for Machine Learning I</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/sta314h1" target="_blank">STA314H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Surveys, Sampling and Observational Data</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/sta304h1" target="_blank">STA304H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+              <tr>
+                <td>Time Series Analysis</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/sta457h1" target="_blank">STA457H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
       
-      <div class="course-category">
-        <h3>Statistics</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Course Name</th>
-              <th>Course Code</th>
-              <th>Institution</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Probability and Statistics I</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/sta257h1" target="_blank">STA257H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Probability and Statistics II</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/sta261h1" target="_blank">STA261H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Methods of Data Analysis I</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/sta302h1" target="_blank">STA302H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Probability</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/sta347h1" target="_blank">STA347H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Statistical Methods for Machine Learning I</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/sta314h1" target="_blank">STA314H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Surveys, Sampling and Observational Data</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/sta304h1" target="_blank">STA304H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-            <tr>
-              <td>Time Series Analysis</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/sta457h1" target="_blank">STA457H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div class="course-category">
-        <h3>Psychology</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Course Name</th>
-              <th>Course Code</th>
-              <th>Institution</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Introduction to Social Psychology</td>
-              <td><a href="https://artsci.calendar.utoronto.ca/course/psy220h1" target="_blank">PSY220H1</a></td>
-              <td>University of Toronto</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <details class="course-category">
+        <summary><strong>Psychology</strong></summary>
+        <div class="category-content">
+          <table>
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Institution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Introduction to Social Psychology</td>
+                <td><a href="https://artsci.calendar.utoronto.ca/course/psy220h1" target="_blank">PSY220H1</a></td>
+                <td>University of Toronto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
     </section>
     
     <!-- Notes Section -->
