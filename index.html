@@ -2,46 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Haoran (Alex) Yu - Portfolio</title>
+
+  <!-- Soft retro mono accent font (light use) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
-    /* Global Variables */
+    /* =========
+       Variables
+       ========= */
     :root {
-      --bg-gradient-start: #f8f9fa;
-      --bg-gradient-mid: #eef6f9;
-      --bg-gradient-end: #d4e2ef;
-      --text-color: #333;
-      --header-footer-bg: linear-gradient(45deg, #343a40, #495057);
-      --header-footer-text: #fff;
-      --link-color: #007bff;
-      --container-bg: #fff;
-      --font-family: Calibri, sans-serif;
+      /* Background */
+      --bg-gradient-start: #f3f2ee;
+      --bg-gradient-mid: #e8ecef;
+      --bg-gradient-end: #d8dde3;
+
+      --text-color: #1f2a33;
+
+      /* Bars */
+      --header-footer-bg: linear-gradient(180deg, #39424a 0%, #2e353c 100%);
+      --header-footer-text: #f3f6f8;
+
+      /* Accent (workstation teal) */
+      --link-color: #2a8a8a;
+      --link-color-2: #3aa3a3;
+
+      /* Panels */
+      --container-bg: rgba(252, 252, 250, 0.92);
+      --panel-border: rgba(0,0,0,0.14);
+      --panel-shadow: rgba(0,0,0,0.14);
+
+      /* Fonts */
+      --font-family: Calibri, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+      /* Retro overlays (soft) */
+      --scanline-opacity: 0.06;
+      --vignette-opacity: 0.20;
+
+      /* Motion */
+      --ease: cubic-bezier(.2,.8,.2,1);
     }
 
     /* Global Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: var(--font-family);
       font-size: 16px;
       line-height: 1.6;
       color: var(--text-color);
-      background: none;
+      background: radial-gradient(1200px 800px at 30% 10%, var(--bg-gradient-start), var(--bg-gradient-mid) 55%, var(--bg-gradient-end));
       position: relative;
       z-index: 0;
+      padding-bottom: 78px; /* make room for fixed footer */
+      overflow-x: hidden;
+    }
+
+    /* Soft CRT scanline + vignette overlay (not “terminal”) */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(0,0,0,var(--scanline-opacity)) 0px,
+          rgba(0,0,0,var(--scanline-opacity)) 1px,
+          rgba(0,0,0,0) 3px,
+          rgba(0,0,0,0) 6px
+        );
+      mix-blend-mode: multiply;
+      opacity: 1;
+    }
+    body::after{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background: radial-gradient(closest-side at 50% 50%,
+        rgba(0,0,0,0) 60%,
+        rgba(0,0,0,var(--vignette-opacity)) 120%);
+      opacity: 0.85;
     }
 
     /* Particle Background */
     #particles-js {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       z-index: -999;
+      opacity: 0.65;
     }
 
     /* Header & Navigation */
@@ -52,36 +109,86 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      backdrop-filter: blur(4px);
     }
     header nav {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0 12px;
+      align-items: center;
     }
     header nav a {
       color: var(--header-footer-text);
-      margin: 0 15px;
+      margin: 0 4px;
       text-decoration: none;
-      font-size: 1.1em;
+      font-size: 0.98em;
       cursor: pointer;
-      transition: color 0.2s ease, transform 0.2s ease;
+      transition: transform 0.16s var(--ease), color 0.16s var(--ease), background 0.16s var(--ease);
+      font-family: var(--mono);
+      letter-spacing: 0.2px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      position: relative;
+      user-select: none;
     }
     header nav a:hover {
-      color: var(--link-color);
-      transform: scale(1.05);
-      text-decoration: underline;
+      color: #dff6ff;
+      transform: translateY(-1px);
+      background: rgba(42,138,138,0.18);
+      text-decoration: none;
     }
 
-    /* Main Container (Home, About, CV, Courses, Notes) */
+    /* Sound toggle pill (minimal) */
+    .sound-toggle{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.9em;
+      color: var(--header-footer-text);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 6px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.16s var(--ease), background 0.16s var(--ease);
+      margin-left: 6px;
+    }
+    .sound-toggle:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+    }
+    .sound-dot{
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.18) inset;
+    }
+    .sound-toggle[data-on="true"] .sound-dot{
+      background: var(--link-color-2);
+      box-shadow: 0 0 12px rgba(58,163,163,0.65);
+    }
+
+    /* Main Container (Home, About, CV, Courses, Notes, Blog) */
     .container {
       max-width: 800px;
       margin: 30px auto;
       background: var(--container-bg);
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       position: relative;
-      z-index: 1;
-      display: none; /* Hidden by default */
+      z-index: 3;
+      display: none; /* hidden by default */
+      border: 1px solid var(--panel-border);
+      box-shadow:
+        0 10px 22px var(--panel-shadow),
+        0 1px 0 rgba(255,255,255,0.75) inset,
+        0 -1px 0 rgba(0,0,0,0.05) inset;
     }
 
     /* Projects Section Container (Wider) */
@@ -91,30 +198,40 @@
       background: var(--container-bg);
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       position: relative;
-      z-index: 1;
-      display: none; /* Hidden by default */
+      z-index: 3;
+      display: none; /* hidden by default */
+      border: 1px solid var(--panel-border);
+      box-shadow:
+        0 10px 22px var(--panel-shadow),
+        0 1px 0 rgba(255,255,255,0.75) inset,
+        0 -1px 0 rgba(0,0,0,0.05) inset;
     }
 
     /* Section Transition Animation */
     section {
       margin-bottom: 30px;
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(18px);
+      transition: opacity 0.28s var(--ease), transform 0.28s var(--ease);
+      will-change: opacity, transform;
     }
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
+
     h1, h2, h3 {
       color: var(--text-color);
       margin-bottom: 10px;
+      letter-spacing: 0.2px;
     }
-    h1 { font-size: 1.5em; margin-bottom: 15px; }
+    h1 { font-size: 1.55em; margin-bottom: 15px; font-family: var(--mono); }
+    h2 { font-family: var(--mono); font-size: 1.22em; }
+    h3 { font-family: var(--mono); font-size: 1.08em; }
+
     p { margin-bottom: 10px; }
-    a { color: var(--link-color); text-decoration: none; }
+    a { color: #1f6fb2; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     /* Table Styling */
@@ -122,48 +239,48 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 15px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(0,0,0,0.10);
     }
     th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
+      border: 1px solid rgba(0,0,0,0.10);
+      padding: 9px 10px;
       text-align: left;
       vertical-align: middle;
     }
-    th { background: #f4f4f4; }
+    th {
+      background: rgba(42,138,138,0.10);
+      font-family: var(--mono);
+      font-weight: 600;
+      color: #17333a;
+    }
     table tbody tr:hover {
-      background-color: #e9ecef;
-      transform: translateX(5px);
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      background-color: rgba(42,138,138,0.08);
+      transition: background-color 0.2s var(--ease);
+      transform: none; /* remove “slide” to feel less nerdy/techy */
     }
 
-    .course-category {
-      margin-bottom: 30px; /* Adjust the value to your liking */
-    }
+    .course-category { margin-bottom: 30px; }
 
     /* Course Notes Styling */
     .course-notes {
-      background-color: #eef6f9;
+      background-color: rgba(42,138,138,0.08);
       border-left: 4px solid var(--link-color);
       padding: 15px;
       margin-bottom: 20px;
-      border-radius: 4px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 6px;
+      transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease);
+      border-top: 1px solid rgba(255,255,255,0.65);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
     .course-notes:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
     }
-    .course-notes h3 {
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    .course-notes ul {
-      list-style-type: disc;
-      margin-left: 20px;
-    }
-    .course-notes ul li {
-      margin-bottom: 8px;
-    }
+    .course-notes h3 { margin-bottom: 10px; font-weight: bold; }
+
+    .course-notes ul { list-style-type: disc; margin-left: 20px; }
+    .course-notes ul li { margin-bottom: 8px; }
 
     /* Projects Container Layout (3 per row) */
     .projects-container {
@@ -179,66 +296,77 @@
 
     /* Project Block Animation */
     .project {
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 12px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 8px;
+      transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), border-color 0.22s var(--ease);
       margin-bottom: 15px;
-    }
-    .project:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Hide default triangle */
-    details summary {
-      list-style: none; /* Prevent double arrow */
-      cursor: pointer;
-      font-size: 1.2em;
-      font-weight: bold;
-      padding: 8px;
-      background: #eef6f9;
-      border: 1px solid var(--link-color);
-      border-radius: 4px;
-      margin-bottom: 8px;
+      background: rgba(255,255,255,0.55);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset;
       position: relative;
     }
-    details summary::-webkit-details-marker {
-      display: none;
+    .project:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+      border-color: rgba(42,138,138,0.35);
     }
-    
-    /* Custom arrow */
+
+    /* Small tag to make projects feel more “human story”, less academic */
+    .project-tag{
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.72em;
+      color: #fff;
+      background: linear-gradient(135deg, var(--link-color), var(--link-color-2));
+      padding: 3px 8px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    /* details/summary styling */
+    details summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 1.05em;
+      font-weight: 600;
+      padding: 9px 10px;
+      background: rgba(42,138,138,0.08);
+      border: 1px solid rgba(42,138,138,0.35);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      position: relative;
+      font-family: var(--mono);
+      color: #17333a;
+      transition: transform 0.16s var(--ease), background 0.16s var(--ease);
+      user-select: none;
+    }
+    details summary:hover{
+      transform: translateY(-1px);
+      background: rgba(42,138,138,0.11);
+    }
+    details summary::-webkit-details-marker { display: none; }
     details summary:before {
       content: "▶";
       display: inline-block;
       margin-right: 8px;
       transition: transform 0.2s ease;
+      color: var(--link-color);
+      text-shadow: 0 0 10px rgba(42,138,138,0.15);
     }
-    details[open] summary:before {
-      content: "▼";
-    }
-    
-    /* Content spacing */
-    .category-content {
-      padding: 10px 0 20px 20px;
-    }
-    
-    /* Optional scroll for tall tables */
-    .category-content table {
-      max-height: 300px;
-      overflow-y: auto;
-      display: block;
-    }
+    details[open] summary:before { content: "▼"; }
 
-
+    .category-content { padding: 10px 0 20px 20px; }
+    .category-content table { max-height: 300px; overflow-y: auto; display: block; }
 
     /* Scroll Down Indicator */
     .scroll-down {
       text-align: center;
       font-size: 2em;
       margin-top: 20px;
-      animation: bounce 2s infinite;
+      animation: bounce 2.2s infinite;
       color: var(--link-color);
+      font-family: var(--mono);
+      opacity: 0.95;
     }
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
@@ -246,40 +374,148 @@
       60% { transform: translateY(5px); }
     }
 
-    .clearfix::after {
-      content: "";
-      display: table;
-      clear: both;
+    .clearfix::after { content: ""; display: table; clear: both; }
+
+    /* Blog with dropdown button */
+    .blog-card{
+      border:1px solid rgba(0,0,0,.12);border-radius:10px;background:rgba(255,255,255,.60);
+      margin:14px 0;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.6) inset
+    }
+    .blog-header{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:12px 14px;background:rgba(42,138,138,.08)
+    }
+    .blog-title{font-family:var(--mono);font-size:1.02em}
+    .blog-meta{font-family:var(--mono);font-size:.82em;color:rgba(31,42,51,.75)}
+    .blog-toggle{
+      font-family:var(--mono);font-size:.85em;cursor:pointer;user-select:none;
+      border:1px solid rgba(42,138,138,.45);background:linear-gradient(180deg,#ecf6f6,#d9efef);
+      padding:6px 10px;border-radius:8px;transition:transform .15s var(--ease),box-shadow .15s var(--ease)
+    }
+    .blog-toggle:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    .blog-content{padding:0 14px 14px 14px;display:none}
+    .blog-card.open .blog-content{display:block}
+
+    /* ====== NEW: Project search + tag filter styles ====== */
+    .project-controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      margin:10px 0 18px 0;
+      padding:10px;
+      background:rgba(42,138,138,0.08);
+      border:1px solid rgba(42,138,138,0.25);
+      border-radius:8px;
+    }
+    #projectSearch{
+      flex:1 1 260px;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.20);
+      font-family:var(--mono);
+      background:rgba(255,255,255,0.85);
+    }
+    #projectSearch:focus{
+      outline:none;
+      border-color:var(--link-color);
+      box-shadow:0 0 0 2px rgba(42,138,138,0.25);
+    }
+    .project-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+    .project-filter-tag{
+      font-family:var(--mono);
+      font-size:.78em;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid rgba(42,138,138,0.4);
+      background:rgba(42,138,138,0.08);
+      cursor:pointer;
+      user-select:none;
+      transition:all .15s var(--ease);
+      white-space:nowrap;
+    }
+    .project-filter-tag:hover{ background:rgba(42,138,138,0.16); }
+    .project-filter-tag.active{
+      background:linear-gradient(135deg,var(--link-color),var(--link-color-2));
+      color:#fff; border-color:transparent;
     }
 
     /* Footer Fixed at Bottom */
     footer {
       position: fixed;
-      bottom: 0;
-      left: 0;
+      bottom: 0; left: 0;
       width: 100%;
       background: var(--header-footer-bg);
       color: var(--header-footer-text);
       text-align: center;
-      padding: 15px 0;
+      padding: 12px 0;
       z-index: 1000;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 -6px 18px rgba(0,0,0,0.18);
     }
     footer a {
       color: var(--header-footer-text);
       margin: 0 10px;
       text-decoration: none;
       transition: color 0.2s ease;
+      font-family: var(--mono);
+      font-size: 0.92em;
     }
     footer a:hover {
-      color: var(--link-color);
+      color: #dff6ff;
       text-decoration: underline;
     }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      * { transition: none !important; animation: none !important; }
+      body::before, body::after{ display:none !important; }
+    }
+
+    /* Small screens */
+    @media (max-width: 980px){
+      .projects-container .project { flex: 1 1 100%; }
+      .container, .projects-section { margin: 18px 12px; }
+    }
+
+    /* ===== Announcements ===== */
+    .announcement {
+      border: 1px solid rgba(0,0,0,.12);
+      border-left: 5px solid var(--accent);
+      background: rgba(255,255,255,.65);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 12px 0;
+      box-shadow: 0 1px 0 rgba(255,255,255,.6) inset;
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+    }
+    .announcement:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 18px rgba(0,0,0,.12);
+    }
+    .announcement-meta {
+      font-family: var(--mono);
+      font-size: .82em;
+      color: rgba(31,42,51,.75);
+      margin-bottom: 6px;
+    }
+    .announcement-title {
+      font-family: var(--mono);
+      font-size: 1.02em;
+      margin: 0 0 6px 0;
+    }
+    .announcement p { margin: 0; }
+
+    /* optional variants */
+    .announcement.is-major { border-left-color: #2a8a8a; }
+    .announcement.is-info  { border-left-color: #3aa3a3; }
   </style>
 </head>
+
 <body>
   <!-- Particle Background -->
   <div id="particles-js"></div>
-  
+
   <!-- Header / Navigation -->
   <header>
     <nav>
@@ -288,38 +524,52 @@
       <a onclick="showSection('courses')">Relevant Education</a>
       <a onclick="showSection('projects')">Projects</a>
       <a onclick="showSection('notes')">Notes</a>
+      <!-- NEW: Blog next to Notes -->
+      <a onclick="showSection('blog')">Blog</a>
+
+      <!-- SFX toggle -->
+      <div id="soundToggle" class="sound-toggle" data-on="false" title="Toggle sound effects">
+        <span class="sound-dot" aria-hidden="true"></span>
+        <span id="soundLabel">SFX: OFF</span>
+      </div>
     </nav>
   </header>
-  
-  <!-- Main Container for Home, About, CV, Courses, Notes -->
+
+  <!-- Main Container for Home, About, CV, Courses, Notes, Blog -->
   <div class="container">
     <!-- Home Section (default visible) -->
     <section id="home" class="visible">
       <h1>Welcome to My Website!</h1>
-      <p>This personal portfolio is dedicated to showcasing my academic background, research, and professional skills. Here, you will find comprehensive course notes, details about my research interests, and insights into my analytical work in data science and mathematics.</p>
+      <p>This personal portfolio is dedicated to showcasing my academic background, research, and professional skills. Here, you will find comprehensive course notes, details about my research interests, and insights into my work.</p>
       <p>The purpose of this website is to share my ongoing journey as a professional, highlighting my work at the University of Toronto and beyond. I invite you to explore the various sections for more information on my academic pursuits and professional endeavors.</p>
       <h2>Announcements</h2>
-      <p>Stay tuned for the latest updates and announcements.</p>
-      <div class="scroll-down">&#8595;</div>
+      <div class="announcement is-major">
+        <div class="announcement-meta">2025-12-14</div>
+        <h3 class="announcement-title">Officially graduated from the University of Toronto</h3>
+        <p>I have officially graduated with an Honours BSc with major in mathematics, minors in Statistics and Economics during Octuber 2025.</p>
+      </div>
+
+      <p><strong>Disclaimer:</strong> The format, content, and structure of this website are updated regularly to reflect my latest work, interests, and developments; interested readers are encouraged to check back periodically for updates. </p>
     </section>
-    
+
     <!-- About Me Section -->
     <section id="about">
       <h2>About Me</h2>
       <div class="about-content clearfix">
-      <p>My name is Haoran Yu, and I hold an Honours Bachelor of Science in Mathematics from the University of Toronto, with minors in Statistics and Economics. I have completed all program requirements and will formally receive my diploma during the Fall 2025 graduation period. My academic training encompasses probability theory, statistical inference, financial economics, data analysis, and machine learning, providing me with a solid foundation in quantitative methodologies. I apply these skills to develop analytical frameworks and predictive models for addressing complex real-world problems, while continually expanding my expertise.</p>
-      
-      <p>You may view and download my curriculum vitae at the following link: <a href="CVs/Haoran Yu CV ENG 2025 IV.pdf" target="_blank">CV (English, PDF)</a>.</p>
-      
-      <p>A Chinese version of my curriculum vitae is also available here: <a href="CVs/俞皓然-CV-中文（第四版）.pdf" target="_blank">CV (Mandarin, PDF)</a>.</p>
-      
-      <p>You may also download the official <em>Letter Confirming Eligibility to Graduate</em> here: <a href="CVs/Letter_Confirming_Eligibility.pdf" target="_blank">Eligibility Letter (PDF)</a>.</p>
+      <p>My name is Haoran Yu. I graduated from the University of Toronto in October 2025 with an Honours Bachelor of Science in Mathematics major, and minors in Statistics and Economics. My academic training spans mathematics, probability and statistics, data analysis, machine learning, economics, and finance, providing a rigorous quantitative foundation. I apply these skills to the development of analytical insights and data-driven models for real-world problems, with a strong interest in continual learning and refinements.</p>
+
+      <p>You may view and download my curriculum vitae at the following link:
+      <a href="CVs/Haoran Yu CV ENG 2025 IV.pdf" target="_blank">CV (English, PDF)</a>.
+      </p>
+
+      <p>A Chinese version of my curriculum vitae is also available here:
+      <a href="CVs/俞皓然-CV-中文（第四版）.pdf" target="_blank">CV (Mandarin, PDF)</a>.
+      </p>
       
       <p><strong>Disclaimer:</strong> I update my CVs regularly and strive to provide the most recent version as promptly as possible. Please note that any downloaded version may become outdated, so check back periodically for updates.</p>
       </div>
-      
     </section>
-    
+
     <!-- Courses and Relevant Education Section -->
     <section id="courses">
       <h2>Courses and Relevant Education</h2>
@@ -343,9 +593,8 @@
                 <td>Specialization</td>
                 <td>Coursera &amp; University of Michigan</td>
                 <td>
-                  <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/4347YZ5A92VV"
-                     target="_blank">
-                     View Specialization
+                  <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/4347YZ5A92VV" target="_blank">
+                    View Specialization
                   </a>
                 </td>
               </tr>
@@ -354,9 +603,8 @@
                 <td>Professional Certificate</td>
                 <td>Coursera &amp; Google</td>
                 <td>
-                  <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/RZF8FAAZQG3P"
-                     target="_blank">
-                     View Certificate
+                  <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/RZF8FAAZQG3P" target="_blank">
+                    View Certificate
                   </a>
                 </td>
               </tr>
@@ -377,76 +625,20 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Calculus with Proofs</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat137y1" target="_blank">MAT137Y1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Linear Algebra I</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat223h1" target="_blank">MAT223H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Linear Algebra II</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat224h1" target="_blank">MAT224H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Multivariable Calculus with Proofs</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat237y1" target="_blank">MAT237Y1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Concepts in Abstract Mathematics</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat246h1" target="_blank">MAT246H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Introduction to Ordinary Differential Equations</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat244h1" target="_blank">MAT244H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Groups and Symmetries</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat301h1" target="_blank">MAT301H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Introduction to Graph Theory</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat332h1" target="_blank">MAT332H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Complex Variables</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat334h1" target="_blank">MAT334H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Introduction to Real Analysis</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/mat337h1" target="_blank">MAT337H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Mathematical Modelling</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/apm348h1" target="_blank">APM348H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Partial Differential Equations</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/apm346h1" target="_blank">APM346H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Nonlinear Optimization</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/apm462h1" target="_blank">APM462H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Mathematical Theory of Finance</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/apm466h1" target="_blank">APM466H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
+              <tr><td>Calculus with Proofs</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat137y1" target="_blank">MAT137Y1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Linear Algebra I</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat223h1" target="_blank">MAT223H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Linear Algebra II</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat224h1" target="_blank">MAT224H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Multivariable Calculus with Proofs</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat237y1" target="_blank">MAT237Y1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Concepts in Abstract Mathematics</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat246h1" target="_blank">MAT246H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Introduction to Ordinary Differential Equations</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat244h1" target="_blank">MAT244H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Groups and Symmetries</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat301h1" target="_blank">MAT301H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Introduction to Graph Theory</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat332h1" target="_blank">MAT332H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Complex Variables</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat334h1" target="_blank">MAT334H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Introduction to Real Analysis</td><td><a href="https://artsci.calendar.utoronto.ca/course/mat337h1" target="_blank">MAT337H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Mathematical Modelling</td><td><a href="https://artsci.calendar.utoronto.ca/course/apm348h1" target="_blank">APM348H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Partial Differential Equations</td><td><a href="https://artsci.calendar.utoronto.ca/course/apm346h1" target="_blank">APM346H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Nonlinear Optimization</td><td><a href="https://artsci.calendar.utoronto.ca/course/apm462h1" target="_blank">APM462H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Mathematical Theory of Finance</td><td><a href="https://artsci.calendar.utoronto.ca/course/apm466h1" target="_blank">APM466H1</a></td><td>University of Toronto</td></tr>
             </tbody>
           </table>
         </div>
@@ -464,36 +656,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Principles of Microeconomics</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/eco101h1" target="_blank">ECO101H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Principles of Macroeconomics</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/eco102h1" target="_blank">ECO102H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Microeconomic Theory</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/eco200y1" target="_blank">ECO200Y1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Applied Game Theory</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/eco316h1" target="_blank">ECO316H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Financial Economics I</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/eco358h1" target="_blank">ECO358H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Financial Economics II: Corporate Finance</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/eco359h1" target="_blank">ECO359H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
+              <tr><td>Principles of Microeconomics</td><td><a href="https://artsci.calendar.utoronto.ca/course/eco101h1" target="_blank">ECO101H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Principles of Macroeconomics</td><td><a href="https://artsci.calendar.utoronto.ca/course/eco102h1" target="_blank">ECO102H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Microeconomic Theory</td><td><a href="https://artsci.calendar.utoronto.ca/course/eco200y1" target="_blank">ECO200Y1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Applied Game Theory</td><td><a href="https://artsci.calendar.utoronto.ca/course/eco316h1" target="_blank">ECO316H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Financial Economics I</td><td><a href="https://artsci.calendar.utoronto.ca/course/eco358h1" target="_blank">ECO358H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Financial Economics II: Corporate Finance</td><td><a href="https://artsci.calendar.utoronto.ca/course/eco359h1" target="_blank">ECO359H1</a></td><td>University of Toronto</td></tr>
             </tbody>
           </table>
         </div>
@@ -511,21 +679,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Introduction to Computer Programming</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/csc108h1" target="_blank">CSC108H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Introduction to Computer Science</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/csc148h1" target="_blank">CSC148H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
+              <tr><td>Introduction to Computer Programming</td><td><a href="https://artsci.calendar.utoronto.ca/course/csc108h1" target="_blank">CSC108H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Introduction to Computer Science</td><td><a href="https://artsci.calendar.utoronto.ca/course/csc148h1" target="_blank">CSC148H1</a></td><td>University of Toronto</td></tr>
             </tbody>
           </table>
         </div>
       </details>
-      
+
       <details class="course-category">
         <summary>Statistics</summary>
         <div class="category-content">
@@ -538,46 +698,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Probability and Statistics I</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/sta257h1" target="_blank">STA257H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Probability and Statistics II</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/sta261h1" target="_blank">STA261H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Methods of Data Analysis I</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/sta302h1" target="_blank">STA302H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Probability</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/sta347h1" target="_blank">STA347H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Statistical Methods for Machine Learning I</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/sta314h1" target="_blank">STA314H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Surveys, Sampling and Observational Data</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/sta304h1" target="_blank">STA304H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
-              <tr>
-                <td>Time Series Analysis</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/sta457h1" target="_blank">STA457H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
+              <tr><td>Probability and Statistics I</td><td><a href="https://artsci.calendar.utoronto.ca/course/sta257h1" target="_blank">STA257H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Probability and Statistics II</td><td><a href="https://artsci.calendar.utoronto.ca/course/sta261h1" target="_blank">STA261H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Methods of Data Analysis I</td><td><a href="https://artsci.calendar.utoronto.ca/course/sta302h1" target="_blank">STA302H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Probability</td><td><a href="https://artsci.calendar.utoronto.ca/course/sta347h1" target="_blank">STA347H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Statistical Methods for Machine Learning I</td><td><a href="https://artsci.calendar.utoronto.ca/course/sta314h1" target="_blank">STA314H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Surveys, Sampling and Observational Data</td><td><a href="https://artsci.calendar.utoronto.ca/course/sta304h1" target="_blank">STA304H1</a></td><td>University of Toronto</td></tr>
+              <tr><td>Time Series Analysis</td><td><a href="https://artsci.calendar.utoronto.ca/course/sta457h1" target="_blank">STA457H1</a></td><td>University of Toronto</td></tr>
             </tbody>
           </table>
         </div>
       </details>
-      
+
       <details class="course-category">
         <summary><strong>Psychology</strong></summary>
         <div class="category-content">
@@ -590,48 +722,45 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Introduction to Social Psychology</td>
-                <td><a href="https://artsci.calendar.utoronto.ca/course/psy220h1" target="_blank">PSY220H1</a></td>
-                <td>University of Toronto</td>
-              </tr>
+              <tr><td>Introduction to Social Psychology</td><td><a href="https://artsci.calendar.utoronto.ca/course/psy220h1" target="_blank">PSY220H1</a></td><td>University of Toronto</td></tr>
             </tbody>
           </table>
         </div>
       </details>
     </section>
-    
+
     <!-- Notes Section -->
     <section id="notes" style="display:none;">
       <h2>Notes</h2>
-      <p>Below are my course notes, organized by subject category. This is the University of Toronto Undergraduate Course Notes Project. Click on any file to view or download it.</p>
 
-      <p>This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0).</p>
-      
-      <p>Portions of these notes may include excerpts from third-party sources used under the doctrine of “fair use” for educational, non-commercial purposes; such materials remain the property of their respective copyright holders.</p>
-      
-      <p>These notes are provided “as is,” without warranty of any kind. The author disclaims all liability for errors or omissions and for any damages arising from their use.</p>
-      
-      <p>All product and service names are trademarks of their respective owners.</p>
-      
-      <p><strong>Takedown:</strong> To request removal of infringing material, please email me directly with a detailed description of the content in question.</p>
+      <p>Below are my course notes, organized by subject area. This collection forms part of the University of Toronto Undergraduate Course Notes Project. Files may be viewed online or downloaded for personal reference.</p>
 
-      <p><strong>Important notice:</strong> Here I am only adding my course notes to facilitate constructive learning. These notes are in no way intended to promote academic misconduct. You should use them solely for educational purposes and in accordance with your institution’s code of conduct.</p>
-      
+      <p>This work is licensed under the Creative Commons Attribution–NonCommercial–NoDerivatives 4.0 International License (CC BY-NC-ND 4.0).</p>
+
+      <p>These notes may contain limited excerpts from third-party materials included under the doctrine of fair use for educational, non-commercial purposes. All such materials remain the property of their respective copyright holders.</p>
+
+      <p>The notes are provided “as is,” without warranties of any kind, express or implied. The author makes no representations regarding accuracy, completeness, or suitability for any particular purpose and disclaims liability for any errors, omissions, or damages arising from their use.</p>
+
+      <p>All product names, service names, and trademarks referenced herein are the property of their respective owners.</p>
+
+      <p><strong>Takedown notice:</strong> If you believe that any material hosted here infringes your copyright, please contact me directly with a detailed description of the content and its location, and I will promptly review and address the request.</p>
+
+      <p><strong>Academic integrity notice:</strong> These notes are shared solely to support constructive learning and personal study. They are not intended to facilitate academic misconduct. Users are responsible for complying with their institution’s academic integrity policies and codes of conduct.</p>
+
       <p>© 2025 Haoran Yu. All rights reserved.</p>
-      
+
       <!-- Economics Notes -->
       <div class="course-notes">
         <h3>Economics</h3>
         <p>Currently organizing, editing, and reviewing the notes; they will not be published until 100% proof-read and finished.</p>
       </div>
-      
+
       <!-- Mathematics Notes -->
       <div class="course-notes">
         <h3>Mathematics</h3>
         <p>Currently organizing, editing, and reviewing the notes; they will not be published until 100% proof-read and finished.</p>
       </div>
-      
+
       <!-- Statistics Notes -->
       <div class="course-notes">
         <h3>Statistics</h3>
@@ -641,46 +770,87 @@
       <!-- Psychology Notes -->
       <div class="course-notes">
         <h3>Psychology</h3>
-        Currently organizing, editing, and reviewing the notes; they will not be published until 100% proof-read and finished.
+        Currently organizing, editing, and reviewing the notes; they will not be published until they are finalized.
       </div>
-      
+
       <p>More notes and updates will be added here over time. Stay tuned!</p>
     </section>
+
+    <section id="blog" style="display:none;">
+      <h2>Blog</h2>
+
+      <!-- BLOG CARD (external content) -->
+      <div class="blog-intro course-notes">
+        <h3>About this blog</h3>
+        <p>
+          Short updates, project notes, and reflections live here. Longer pieces are stored
+          as separate files and loaded into the cards below on demand.
+        </p>
+      </div>
+
+      <article class="blog-card" data-blog data-src="blog/first-notes.html">
+        <div class="blog-header">
+          <div>
+            <div class="blog-title">First Notes</div>
+            <div class="blog-meta">2025-12-14 · External file</div>
+          </div>
+          <button class="blog-toggle" data-toggle aria-expanded="false">Open</button>
+        </div>
+        <div class="blog-content"><!-- loaded from blog/first-notes.html --></div>
+      </article>
+    </section>
   </div>
-  
-  <!-- Projects Section (Wider Container) -->
+
+  <!-- ===== NEW: Projects Section (with search + tags) ===== -->
   <div class="projects-section">
     <section id="projects">
       <p style="font-style: italic; margin-bottom: 15px;">
-      <strong>Disclaimer:</strong> All content presented here is for educational and professional demonstration purposes only. Plagiarism is strictly prohibited, and all visitors are expected to adhere to the academic code of conduct of their respective institutions. Please note that not all of my completed projects are uploaded immediately; I only share selected projects after a delay and when appropriate. Ongoing projects are not published until they are finalized.
+        <strong>Disclaimer:</strong> All content presented here is for educational and professional demonstration purposes only. Plagiarism is strictly prohibited, and all visitors are expected to adhere to the academic code of conduct of their respective institutions. Please note that not all of my completed projects are uploaded immediately; I only share selected projects after a delay and when appropriate. Ongoing projects are not published until they are finalized.
       </p>
+
       <h2>Projects</h2>
+
+      <!-- Controls -->
+      <div class="project-controls">
+        <input
+          type="text"
+          id="projectSearch"
+          placeholder="Search projects…"
+          aria-label="Search projects"
+        />
+        <div id="projectTagFilters" class="project-tags"></div>
+      </div>
+
+      <!-- Cards -->
       <div class="projects-container">
+        <!-- If you already have cards, keep them.
+             Below are the 5 from your earlier layout, now tagged for filtering. -->
+
         <!-- Project 1 -->
-        <div class="project">
+        <div class="project" data-tags="Education">
           <h3>University of Toronto Undergraduate Course Notes</h3>
-          <p>This project curates comprehensive course notes from my classes at the University of Toronto, covering mathematics, economics, and statistics. The notes, prepared in LaTeX, are regularly updated and reflect my personal academic experience. As I continue to learn, certain definitions or proofs may be refined further.</p>
+          <p>This project curates comprehensive course notes from my classes at the University of Toronto, covering mathematics, economics, and statistics. The notes, prepared in LaTeX or Typst, are regularly updated and reflect my personal academic experience. As I continue to learn, certain definitions or proofs may be refined further.</p>
           <p><strong>Key Skills:</strong> Proficiency in LaTeX, effective note-taking, time management, and deep subject knowledge.</p>
         </div>
-        
+
         <!-- Project 2 -->
-        <div class="project">
-          <h3>Regression Analysis on Insurance Premium</h3>
+        <div class="project" data-tags="ML/AI,Finance">
+          <h3>Regression Analysis on Insurance Premium (Group Project)</h3>
           <p>This project involves conducting a comprehensive regression analysis on insurance premium data. It evaluates relationships between various factors and premium amounts using statistical methods.</p>
           <p><strong>Key Skills:</strong> Data cleaning, regression analysis using R, and data visualization using R.</p>
           <p><a href="https://github.com/HaoranYu1234/Regression-Analysis-on-Insruance-Premium" target="_blank">View Project on GitHub</a></p>
         </div>
-        
+
         <!-- Project 3 -->
-        <div class="project">
-          <h3>Detection of YouTube Spam Comments</h3>
+        <div class="project" data-tags="ML/AI">
+          <h3>Detection of YouTube Spam Comments (Group Project)</h3>
           <p>This project explores methods for detecting spam comments on YouTube by cleaning and processing text data, extracting features, and using machine learning to classify comments.</p>
           <p><strong>Key Skills:</strong> Natural language processing, feature extraction, data visualization, and machine learning classification with scikit-learn.</p>
           <p><a href="https://github.com/HaoranYu1234/STA314H1-Course-Project-Detection-of-YouTube-Spam-Comments" target="_blank">View Project on GitHub</a></p>
         </div>
-        
+
         <!-- Project 4 -->
-        <div class="project">
+        <div class="project" data-tags="Data Analytics">
           <h3>Research in Biodiversity of National Park</h3>
           <p>This research project examines the biodiversity in a national park using statistical analysis and machine learning techniques to identify species distributions and evaluate environmental impacts.</p>
           <p><strong>Key Skills:</strong> Data visualization, and communication.</p>
@@ -688,7 +858,7 @@
         </div>
 
         <!-- Project 5 -->
-        <div class="project">
+        <div class="project" data-tags="ML/AI,Finance">
           <h3>Machine Learning Classification And Loan Default Prediction</h3>
           <p>This project presents a loan‐default prediction model on LendingClub’s 2007–2010 data that, by rebalancing the training set and using a Random Forest, achieves an AUC of 0.67 and captures 22% of actual defaults.</p>
           <p><strong>Key Skills:</strong> EDA, feature engineering, data visualization, and machine learning classification with scikit-learn.</p>
@@ -697,7 +867,7 @@
       </div>
     </section>
   </div>
-  
+
   <!-- Footer -->
   <footer>
     <p>
@@ -707,20 +877,21 @@
       <a href="https://www.instagram.com/alexyu685" target="_blank">Instagram</a>
     </p>
   </footer>
-  
+
   <!-- Particles.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <!-- Initialize Particles.js -->
+
+  <!-- Initialize Particles.js (soft retro ambience) -->
   <script>
     particlesJS("particles-js", {
       "particles": {
-        "number": { "value": 150, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#007bff" },
+        "number": { "value": 90, "density": { "enable": true, "value_area": 900 } },
+        "color": { "value": "#2a8a8a" },
         "shape": { "type": "circle" },
-        "opacity": { "value": 0.5 },
-        "size": { "value": 4, "random": true },
-        "line_linked": { "enable": true, "distance": 150, "color": "#007bff", "opacity": 0.4, "width": 1 },
-        "move": { "enable": true, "speed": 3 }
+        "opacity": { "value": 0.30 },
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": true, "distance": 170, "color": "#2a8a8a", "opacity": 0.18, "width": 1 },
+        "move": { "enable": true, "speed": 1.1 }
       },
       "interactivity": {
         "events": {
@@ -728,56 +899,342 @@
           "onclick": { "enable": true, "mode": "push" }
         },
         "modes": {
-          "grab": { "distance": 200, "line_linked": { "opacity": 0.5 } },
-          "push": { "particles_nb": 4 }
+          "grab": { "distance": 170, "line_linked": { "opacity": 0.22 } },
+          "push": { "particles_nb": 2 }
         }
       },
       "retina_detect": true
     });
   </script>
-  
-  <!-- Section Toggle Script -->
+
+  <!-- LOUD, DYNAMIC SFX with pooling + limiter + cooldown to survive rapid clicks -->
   <script>
-    function showSection(sectionId) {
-      // Get the two containers
-      var mainContainer = document.querySelector(".container");
-      var projectsContainer = document.querySelector(".projects-section");
-      
-      // Hide both containers
-      if (mainContainer) {
-        mainContainer.style.display = "none";
+  const SFX = (() => {
+    let ctx, master, comp;
+    const pool = []; // voice pool for polyphony
+    const maxVoices = 12;
+    const cooldown = new Map(); // actionId -> lastTime
+    const minInterval = { ui: 30, nav: 60, toggle: 80, boot: 150 }; // ms
+    let enabled = true;
+    let unlocked = false;
+
+    function ensureCtx(){
+      if (!ctx) {
+        ctx = new (window.AudioContext||window.webkitAudioContext)();
+        // master chain: compressor -> master gain -> destination
+        comp = ctx.createDynamicsCompressor();
+        comp.threshold.setValueAtTime(-24, ctx.currentTime);
+        comp.knee.setValueAtTime(24, ctx.currentTime);
+        comp.ratio.setValueAtTime(6, ctx.currentTime);
+        comp.attack.setValueAtTime(0.003, ctx.currentTime);
+        comp.release.setValueAtTime(0.2, ctx.currentTime);
+
+        master = ctx.createGain();
+        master.gain.value = 0.70; // louder master
+        comp.connect(master);
+        master.connect(ctx.destination);
       }
-      if (projectsContainer) {
-        projectsContainer.style.display = "none";
+      return ctx;
+    }
+
+    async function unlock(){
+      ensureCtx();
+      if (ctx.state === "suspended") { try { await ctx.resume(); } catch(e){} }
+      unlocked = true;
+    }
+
+    function allowed(actionId){
+      const now = performance.now();
+      const last = cooldown.get(actionId) || 0;
+      const gap = minInterval[actionId] ?? 40;
+      if (now - last < gap) return false; // rate-limit to avoid click-storm silence
+      cooldown.set(actionId, now);
+      return true;
+    }
+
+    function voice(){
+      // reuse or create a tiny gain “voice” bus
+      const now = ctx.currentTime;
+      for (const v of pool){
+        if (v.freeAt && v.freeAt < now) return v;
       }
-      
-      // Hide all sections inside both containers
-      document.querySelectorAll(".container > section, .projects-section > section").forEach(function(sec) {
-        sec.classList.remove("visible");
-        sec.style.display = "none";
+      if (pool.length < maxVoices){
+        const g = ctx.createGain();
+        g.gain.value = 1.0;
+        g.connect(comp); // all voices into compressor
+        const v = { g, freeAt: 0 };
+        pool.push(v);
+        return v;
+      }
+      // steal oldest
+      return pool[0];
+    }
+
+    // helpers
+    function envGain(node, start, a=0.002, d=0.05, s=0.0001){
+      node.gain.setValueAtTime(0.0001, start);
+      node.gain.exponentialRampToValueAtTime(0.9, start + a);
+      node.gain.exponentialRampToValueAtTime(s, start + a + d);
+    }
+    function makeNoise(dur=0.03){
+      const bufferSize = Math.max(1, Math.floor(ctx.sampleRate * dur));
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i=0;i<bufferSize;i++){
+        const t = i / bufferSize;
+        const decay = Math.pow(1 - t, 2.6);
+        data[i] = (Math.random()*2-1) * decay;
+      }
+      const src = ctx.createBufferSource();
+      src.buffer = buffer;
+      return src;
+    }
+
+    function playUi(){
+      if (!enabled || !allowed('ui')) return;
+      const c = ensureCtx(); const now = c.currentTime; const v = voice();
+
+      const o = c.createOscillator(); o.type = "triangle";
+      const base = 980 + (Math.random()-0.5)*80;
+      o.frequency.setValueAtTime(base, now);
+      o.frequency.exponentialRampToValueAtTime(base*1.12, now + 0.03);
+
+      const g = c.createGain(); g.gain.value = 0.44; // punchy
+      const n = makeNoise(0.02);
+      const lp = c.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 3200;
+
+      // route
+      o.connect(g); n.connect(lp); lp.connect(g); g.connect(v.g);
+
+      // envelopes
+      envGain(g, now, 0.0016, 0.045, 0.0001);
+
+      o.start(now); n.start(now);
+      const end = now + 0.08;
+      o.stop(end); n.stop(end);
+      v.freeAt = end + 0.01;
+    }
+
+    function playNav(){
+      if (!enabled || !allowed('nav')) return;
+      const c = ensureCtx(); const now = c.currentTime; const v = voice();
+
+      const seq = [
+        { f: 520, dur: 0.06, type: "triangle", gain: 0.5 },
+        { f: 760, dur: 0.06, type: "triangle", gain: 0.45, dt: 0.05 },
+        { f: 1080, dur: 0.08, type: "sine", gain: 0.38, dt: 0.10 }
+      ];
+      seq.forEach(s=>{
+        const o = c.createOscillator(); o.type = s.type; o.frequency.value = s.f;
+        const g = c.createGain(); g.gain.value = s.gain;
+        const t = now + (s.dt||0);
+        envGain(g, t, 0.002, s.dur, 0.0001);
+        o.connect(g); g.connect(v.g);
+        o.start(t); o.stop(t + s.dur + 0.05);
+        v.freeAt = Math.max(v.freeAt, t + s.dur + 0.06);
       });
-      
-      // Show the chosen container and its section
-      if (sectionId === "projects") {
-        projectsContainer.style.display = "block";
-        var selected = document.getElementById(sectionId);
-        if (selected) {
-          selected.style.display = "block";
-          void selected.offsetWidth;
-          selected.classList.add("visible");
-        }
-      } else {
-        mainContainer.style.display = "block";
-        var selected = document.getElementById(sectionId);
-        if (selected) {
-          selected.style.display = "block";
-          void selected.offsetWidth;
-          selected.classList.add("visible");
-        }
+
+      // airy click
+      const n = makeNoise(0.02); const lp = c.createBiquadFilter();
+      lp.type="lowpass"; lp.frequency.value = 2400;
+      const g = c.createGain(); g.gain.value = 0.22;
+      n.connect(lp); lp.connect(g); g.connect(v.g);
+      n.start(now); n.stop(now+0.03);
+    }
+
+    function playToggle(open){
+      if (!enabled || !allowed('toggle')) return;
+      const c = ensureCtx(); const now = c.currentTime; const v = voice();
+
+      const o = c.createOscillator(); o.type = open ? "triangle" : "sine";
+      o.frequency.value = open ? 680 : 380;
+      const g = c.createGain(); g.gain.value = 0.44;
+      envGain(g, now, 0.002, 0.07, 0.0001);
+      o.connect(g); g.connect(v.g);
+      o.start(now); o.stop(now+0.09);
+
+      const n = makeNoise(0.03); const lp = c.createBiquadFilter();
+      lp.type="lowpass"; lp.frequency.value = open ? 3000 : 2200;
+      const g2 = c.createGain(); g2.gain.value = 0.26;
+      n.connect(lp); lp.connect(g2); g2.connect(v.g);
+      n.start(now); n.stop(now+0.03);
+      v.freeAt = now + 0.11;
+    }
+
+    function playBoot(){
+      if (!enabled || !allowed('boot')) return;
+      const c = ensureCtx(); const now = c.currentTime; const v = voice();
+      const notes = [392, 523.25, 659.25, 784];
+      notes.forEach((f,i)=>{
+        const o = c.createOscillator(); o.type="sine"; o.frequency.value = f;
+        const g = c.createGain(); g.gain.value = 0.36;
+        const t = now + i*0.08;
+        envGain(g, t, 0.003, 0.09, 0.0001);
+        o.connect(g); g.connect(v.g);
+        o.start(t); o.stop(t+0.12);
+        v.freeAt = Math.max(v.freeAt, t+0.13);
+      });
+    }
+
+    function setEnabled(on){
+      enabled = !!on;
+      localStorage.setItem("site_sfx_enabled", enabled ? "1" : "0");
+    }
+    function loadEnabled(){
+      const v = localStorage.getItem("site_sfx_enabled");
+      enabled = (v===null) ? true : v==="1";
+      return enabled;
+    }
+
+    return {
+      unlock, loadEnabled, setEnabled,
+      ui: playUi, nav: playNav, toggle: playToggle, boot: playBoot
+    };
+  })();
+  </script>
+
+  <script>
+    function showSection(id){
+      if (SFX) { SFX.nav(); }
+      const main = document.querySelector(".container");
+      const projects = document.querySelector(".projects-section");
+      if (main) main.style.display="none";
+      if (projects) projects.style.display="none";
+      document.querySelectorAll(".container>section,.projects-section>section").forEach(s=>{
+        s.classList.remove("visible"); s.style.display="none";
+      });
+      setTimeout(()=>{
+        const sec = document.getElementById(id);
+        if (!sec) return;
+        const parent = sec.parentElement;
+        parent.style.display="block";
+        sec.style.display="block";
+        void sec.offsetWidth;
+        sec.classList.add("visible");
+      },70);
+    }
+
+    function initProjectFilters(){
+      const search = document.getElementById("projectSearch");
+      const tagBox = document.getElementById("projectTagFilters");
+      const projects = Array.from(document.querySelectorAll(".projects-container .project"));
+      if (!search || !tagBox || !projects.length) return;
+
+      const allowed = ["ML/AI","Finance","Education","Statistics", "Data Analytics", "Economics", "Mathematics"];
+      const active = new Set();
+
+      allowed.forEach(tag=>{
+        const btn = document.createElement("div");
+        btn.className="project-filter-tag";
+        btn.textContent=tag;
+        btn.addEventListener("click",async ()=>{
+          btn.classList.toggle("active");
+          active.has(tag)?active.delete(tag):active.add(tag);
+          await SFX.unlock(); SFX.ui();
+          apply();
+        });
+        tagBox.appendChild(btn);
+      });
+
+      search.addEventListener("input", apply);
+
+      function apply(){
+        const q = (search.value||"").toLowerCase();
+        projects.forEach(p=>{
+          const text = (p.innerText||"").toLowerCase();
+          const ptags = (p.dataset.tags||"").split(",").map(t=>t.trim()).filter(Boolean);
+          const matchesQ = text.includes(q);
+          const matchesTags = active.size===0 || ptags.some(t=>active.has(t));
+          p.style.display = (matchesQ && matchesTags) ? "" : "none";
+        });
       }
     }
-    document.addEventListener("DOMContentLoaded", function() {
-      showSection('home');
+
+    // Blog dropdown buttons
+    function initBlogDropdowns(){
+      document.querySelectorAll("[data-blog]").forEach(card=>{
+        const btn = card.querySelector("[data-toggle]");
+        const content = card.querySelector(".blog-content");
+        const src = card.getAttribute("data-src");
+        if (!btn || !content || !src) return;
+
+        let loaded = false;    // cache flag
+        let loading = false;   // prevent double fetch
+
+        async function loadOnce(){
+          if (loaded || loading) return;
+          loading = true;
+          try {
+            // optional tiny delay for nicer feel
+            await SFX?.unlock();
+            const res = await fetch(src, { cache: "no-store" });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const html = await res.text();
+            content.innerHTML = html;
+            loaded = true;
+          } catch (err) {
+            content.innerHTML = `
+              <div style="padding:10px;border-left:3px solid #c0392b;background:rgba(192,57,43,.08);border-radius:6px;">
+                <strong>Could not load post.</strong><br/>
+                <code>${src}</code><br/>
+                <small>${(err && err.message) || 'Unknown error'}</small>
+              </div>`;
+          } finally {
+            loading = false;
+          }
+        }
+
+        btn.addEventListener("click", async ()=>{
+          await SFX?.unlock();
+          const opening = !card.classList.contains("open");
+          if (opening) await loadOnce();
+
+          card.classList.toggle("open");
+          btn.textContent = opening ? "Close" : "Open";
+          btn.setAttribute("aria-expanded", opening ? "true" : "false");
+          SFX?.toggle?.(opening);
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", ()=>{
+      // SFX init & toggle
+      const toggle = document.getElementById("soundToggle");
+      const label = document.getElementById("soundLabel");
+      const updateUI = () => {
+        const on = SFX.loadEnabled();
+        toggle.dataset.on = on ? "true":"false";
+        label.textContent = on ? "SFX: ON" : "SFX: OFF";
+      };
+      updateUI();
+
+      const unlockOnce = async () => { await SFX.unlock(); if (SFX.loadEnabled()) SFX.boot(); };
+      window.addEventListener("pointerdown", unlockOnce, { once:true });
+      window.addEventListener("keydown", unlockOnce, { once:true });
+
+      toggle.addEventListener("click", async ()=>{
+        await SFX.unlock();
+        const on = toggle.dataset.on !== "true";
+        SFX.setEnabled(on);
+        updateUI();
+        SFX.ui();
+        if (on) SFX.boot();
+      });
+
+      // subtle UI ticks (rate-limited by SFX)
+      [...document.querySelectorAll("header nav a"), ...document.querySelectorAll(".project"), ...document.querySelectorAll("details summary")]
+        .forEach(el=>{
+          let cool=false;
+          el.addEventListener("mouseenter", async ()=>{
+            if (cool) return;
+            cool=true; await SFX.unlock(); SFX.ui(); setTimeout(()=>cool=false, 220);
+          });
+        });
+
+      // init modules
+      initProjectFilters();
+      initBlogDropdowns();
+      showSection("home");
     });
   </script>
 </body>
